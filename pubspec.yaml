@@ -29,13 +29,21 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  carousel_slider: ^4.2.1
+  http: ^0.13.4
+  fluttertoast: ^8.0.8
   flutter:
     sdk: flutter
+   
+  intl: ^0.18.1
+  shared_preferences: ^2.1.1
+    
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
@@ -60,8 +68,21 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/patcare.png
+    - assets/images/dog0.jpg
+    - assets/images/dog1.jpg
+    - assets/images/dog2.jpg
+    - assets/images/dog3.jpg
+    - assets/images/dog4.jpg
+    - assets/images/dog5.jpg
+    - assets/images/dog6.jpg
+    - assets/images/dog7.jpg
+    - assets/images/dog8.jpg
+    - assets/images/dog9.jpg
+    - assets/images/dog10.jpg
+    - assets/images/dog11.jpg
+    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
