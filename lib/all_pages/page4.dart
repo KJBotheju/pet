@@ -10,7 +10,7 @@ class _page4State extends State<page4> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('hello'),
+        title: Text('Photograpy'),
       ),
     );
   }
