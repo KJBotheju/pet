@@ -10,7 +10,7 @@ class _page6State extends State<page6> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('hello'),
+        title: Text('Timer'),
       ),
     );
   }

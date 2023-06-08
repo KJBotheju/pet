@@ -34,7 +34,7 @@ dependencies:
   fluttertoast: ^8.0.8
   flutter:
     sdk: flutter
-   
+
   intl: ^0.18.1
   shared_preferences: ^2.1.1
     
