@@ -24,31 +24,43 @@ class _page5State extends State<page5> {
       ),
       body: Container(
         color: Colors.grey[200], // Set the background color
-        padding: EdgeInsets.all(16.0), // Set the padding
-        child: ListView.separated(
-          itemCount: items.length,
-          separatorBuilder: (BuildContext context, int index) =>
-              SizedBox(height: 10.0), // Add a gap between ListTiles
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 100,
-              color: Color.fromARGB(
-                  255, 119, 187, 243), // Set the background color for ListTile
-              child: ListTile(
-                title: Text(
-                  items[index],
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black, // Set the text color for ListTile
+        padding: EdgeInsets.symmetric(
+            vertical: 10, horizontal: 2), // Set the padding
+        child: SingleChildScrollView(
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1, // Set the number of columns
+                mainAxisSpacing: 10.0,
+                childAspectRatio:
+                    2.5 // Set the vertical spacing between grid items
+                ),
+            shrinkWrap:
+                true, // Allow the GridView to be scrollable within the SingleChildScrollView
+            physics:
+                NeverScrollableScrollPhysics(), // Disable GridView's own scrolling
+            itemCount: items.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                color: Color.fromARGB(255, 119, 187,
+                    243), // Set the background color for grid item
+                child: InkWell(
+                  onTap: () {
+                    // onTap code here
+                    print(items[index]);
+                  },
+                  child: Center(
+                    child: Text(
+                      items[index],
+                      style: TextStyle(
+                        color: Colors.black, // Set the text color for grid item
+                        fontSize: 18.0, // Set the font size for grid item
+                      ),
+                    ),
                   ),
                 ),
-                onTap: () {
-                  // onTap code here
-                  print(items[index]);
-                },
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
