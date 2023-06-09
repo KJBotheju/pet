@@ -82,6 +82,12 @@ flutter:
     - assets/images/dog9.jpg
     - assets/images/dog10.jpg
     - assets/images/dog11.jpg
+    - assets/photograpy/photograpy0.jpg
+    - assets/photograpy/photograpy1.jpg
+    - assets/photograpy/photograpy2.jpg
+    - assets/photograpy/photograpy3.jpg
+    - assets/photograpy/photograpy4.jpg
+    
     
   #   - images/a_dot_ham.jpeg
 

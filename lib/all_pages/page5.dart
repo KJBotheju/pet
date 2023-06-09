@@ -9,11 +9,11 @@ class page5 extends StatefulWidget {
 
 class _page5State extends State<page5> {
   List<String> items = [
-    'photographer 1',
-    'photographer 2',
-    'photographer 3',
-    'photographer 4',
-    'photographer 5',
+    'kavinda photography',
+    'rakshitha photography',
+    'tharushi photography',
+    'malki photography',
+    'durandi photography',
   ];
 
   @override
@@ -41,19 +41,31 @@ class _page5State extends State<page5> {
             itemCount: items.length,
             itemBuilder: (BuildContext context, int index) {
               return Container(
-                color: Color.fromARGB(255, 119, 187,
-                    243), // Set the background color for grid item
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image:
+                          AssetImage('assets/photograpy/photograpy$index.jpg'),
+                      fit: BoxFit.cover),
+                ),
+                // color: Color.fromARGB(255, 119, 187,
+                //     243), // Set the background color for grid item
                 child: InkWell(
                   onTap: () {
                     // onTap code here
                     print(items[index]);
                   },
-                  child: Center(
-                    child: Text(
-                      items[index],
-                      style: TextStyle(
-                        color: Colors.black, // Set the text color for grid item
-                        fontSize: 18.0, // Set the font size for grid item
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        items[index],
+                        style: TextStyle(
+                          color: Colors.white,
+                          backgroundColor: Colors.black.withOpacity(0.5),
+                          // Set the text color for grid item
+                          fontSize: 18.0, // Set the font size for grid item
+                        ),
                       ),
                     ),
                   ),
