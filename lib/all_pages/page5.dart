@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class page5 extends StatefulWidget {
   @override
@@ -51,6 +52,7 @@ class _page5State extends State<page5> {
                 //     243), // Set the background color for grid item
                 child: InkWell(
                   onTap: () {
+                    launch('https://www.google.com');
                     // onTap code here
                     print(items[index]);
                   },
