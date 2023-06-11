@@ -17,6 +17,14 @@ class _page5State extends State<page5> {
     'durandi photography',
   ];
 
+  List<String> photography_link = [
+    'https://www.facebook.com/profile.php?id=100008703646884&mibextid=ZbWKwL',
+    'https://github.com/KJBotheju',
+    'https://www.google.com',
+    'https://www.facebook.com/malki.samarasekara.5?mibextid=ZbWKwL',
+    'https://www.facebook.com/',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,9 +60,9 @@ class _page5State extends State<page5> {
                 //     243), // Set the background color for grid item
                 child: InkWell(
                   onTap: () {
-                    launch('https://www.google.com');
+                    launch(photography_link[index]);
                     // onTap code here
-                    print(items[index]);
+                    //print(items[index]);
                   },
                   child: Align(
                     alignment: Alignment.bottomRight,
