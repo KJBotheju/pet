@@ -6,6 +6,8 @@ import '../widgets/menuList.dart';
 import '../screens/home_screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth.dart';
+import '../screens/aboutus_screen.dart';
+import '../screens/petprofile_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
@@ -56,17 +58,24 @@ class AppDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => AboutUs(),
                 ),
               );
             },
-            title: 'GO GO',
-            icon: Icons.dashboard,
+            title: 'About Us',
+            icon: Icons.people,
           ),
           MenuList(
-            press: () {},
-            title: 'cart',
-            icon: Icons.shopping_cart,
+            press: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PetProfile(),
+                ),
+              );
+            },
+            title: 'Pet Profile',
+            icon: Icons.pets,
           ),
           MenuList(
             press: () {
@@ -75,7 +84,7 @@ class AppDrawer extends StatelessWidget {
               Provider.of<Auth>(context, listen: false).logout();
             },
             title: 'Log Out',
-            icon: Icons.exit_to_app,
+            icon: Icons.logout,
           ),
         ],
       ),
