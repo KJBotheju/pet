@@ -88,6 +88,11 @@ flutter:
     - assets/photograpy/photograpy2.jpg
     - assets/photograpy/photograpy3.jpg
     - assets/photograpy/photograpy4.jpg
+    - assets/aboutus/kavinda.jpg
+    - assets/aboutus/malki.jpeg
+    - assets/aboutus/tharushi.jpg
+    - assets/aboutus/rakshitha.jpg
+    - assets/aboutus/tharunya.jpg
     
     
   #   - images/a_dot_ham.jpeg

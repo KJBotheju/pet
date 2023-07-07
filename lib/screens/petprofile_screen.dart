@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:pet/widgets/constant.dart';
 
 class PetProfile extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _PetProfileState extends State<PetProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+      backgroundColor: kPrimaryColor,
       title: Text('Pet Profile'),
     ));
   }

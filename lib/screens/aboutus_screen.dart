@@ -17,23 +17,23 @@ class AboutUs extends StatelessWidget {
   final List<TeamMember> teamMembers = [
     TeamMember(
       name: 'Kavinda Botheju',
-      photo: 'assets/images/dog1.jpg',
+      photo: 'assets/aboutus/kavinda.jpg',
     ),
     TeamMember(
       name: 'Rakshitha Kulasara',
-      photo: 'assets/images/dog2.jpg',
+      photo: 'assets/aboutus/rakshitha.jpg',
     ),
     TeamMember(
       name: 'Tharushi Udawatta',
-      photo: 'assets/images/dog3.jpg',
+      photo: 'assets/aboutus/tharushi.jpg',
     ),
     TeamMember(
       name: 'Malki Dilhara',
-      photo: 'assets/images/dog4.jpg',
+      photo: 'assets/aboutus/malki.jpeg',
     ),
     TeamMember(
       name: 'Durandi Tharunya',
-      photo: 'assets/images/dog5.jpg',
+      photo: 'assets/aboutus/tharunya.jpg',
     ),
   ];
 
@@ -99,6 +99,14 @@ class AboutUs extends StatelessWidget {
             SizedBox(height: 10.0),
             Text(
               'Email: petcare@gmail.com',
+              style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 120, 120, 120)),
+            ),
+            SizedBox(height: 5.0),
+            Text(
+              'Facebook: www.facebook.com/petcare',
               style: TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
