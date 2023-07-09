@@ -70,7 +70,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PetProfile(),
+                  builder: (context) => PetProfilePage(),
                 ),
               );
             },
