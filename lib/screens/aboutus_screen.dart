@@ -42,6 +42,7 @@ class AboutUs extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
+        foregroundColor: Colors.black,
         title: Text('About Us'),
       ),
       body: Container(
@@ -84,11 +85,11 @@ class AboutUs extends StatelessWidget {
               'We are computer science undergraduates at the University of Kelaniya, passionate about pets and technology. Our mission is to provide pet lovers with an innovative mobile application that enhances their experience in caring for and connecting with their beloved pets.',
               textAlign: TextAlign.justify,
               style: TextStyle(
-                fontSize: 16.0,
+                fontSize: 20.0,
                 color: Color.fromARGB(255, 100, 100, 100),
               ),
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 30.0),
             Text(
               'Contact Us',
               style: TextStyle(
@@ -96,7 +97,7 @@ class AboutUs extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10.0),
+            SizedBox(height: 15.0),
             Text(
               'Email: petcare@gmail.com',
               style: TextStyle(
@@ -104,7 +105,7 @@ class AboutUs extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 120, 120, 120)),
             ),
-            SizedBox(height: 5.0),
+            SizedBox(height: 10.0),
             Text(
               'Facebook: www.facebook.com/petcare',
               style: TextStyle(
@@ -112,8 +113,25 @@ class AboutUs extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 120, 120, 120)),
             ),
-            SizedBox(height: 10.0),
+            SizedBox(height: 15.0),
             Expanded(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 5, // Adjust the number of photos per row here
+                ),
+                itemCount: teamMembers.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    child: CircleAvatar(
+                      radius: 25.0,
+                      backgroundImage: AssetImage(teamMembers[index].photo),
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            /* Expanded(
               child: ListView.builder(
                 itemCount: (teamMembers.length / 2).ceil(),
                 itemBuilder: (BuildContext context, int rowIndex) {
@@ -150,7 +168,7 @@ class AboutUs extends StatelessWidget {
                   );
                 },
               ),
-            ),
+            ),*/
           ],
         ),
       ),
