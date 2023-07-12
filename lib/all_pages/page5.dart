@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:pet/widgets/constant.dart';
 
 class page5 extends StatefulWidget {
   @override
@@ -29,6 +30,8 @@ class _page5State extends State<page5> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        foregroundColor: Colors.black,
         title: Text('Photography'),
       ),
       body: Container(
