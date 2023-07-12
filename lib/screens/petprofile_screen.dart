@@ -9,8 +9,13 @@ class Pet {
   String name;
   String image;
   int age;
+  String breed;
 
-  Pet({required this.name, required this.image, required this.age});
+  Pet(
+      {required this.name,
+      required this.image,
+      required this.age,
+      required this.breed});
 }
 
 class PetProfilePage extends StatefulWidget {
@@ -23,6 +28,7 @@ class _PetProfilePageState extends State<PetProfilePage> {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
+  TextEditingController breedController = TextEditingController();
 
   File? _image;
 
@@ -66,6 +72,14 @@ class _PetProfilePageState extends State<PetProfilePage> {
                       color: Colors.grey[600],
                     ),
                   ),
+                  SizedBox(height: 8.0),
+                  Text(
+                    'Breed: ${pet.breed}',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.grey[600],
+                    ),
+                  ),
                   SizedBox(height: 24.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -104,6 +118,7 @@ class _PetProfilePageState extends State<PetProfilePage> {
   void _addPetDetails() {
     nameController.text = '';
     ageController.text = '';
+    breedController.text = '';
     _image = null;
 
     showDialog(
@@ -111,24 +126,33 @@ class _PetProfilePageState extends State<PetProfilePage> {
       builder: (context) {
         return AlertDialog(
           title: Text('Add Pet Details'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildImagePicker(),
-              TextField(
-                controller: nameController,
-                decoration: InputDecoration(
-                  labelText: 'Name',
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _buildImagePicker(),
+                TextField(
+                  controller: nameController,
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                  ),
                 ),
-              ),
-              TextField(
-                controller: ageController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Age',
+                TextField(
+                  controller: ageController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'Age',
+                  ),
                 ),
-              ),
-            ],
+                TextField(
+                  controller: breedController,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    labelText: 'Breed',
+                  ),
+                ),
+              ],
+            ),
           ),
           actions: [
             TextButton(
@@ -146,6 +170,7 @@ class _PetProfilePageState extends State<PetProfilePage> {
                       name: nameController.text,
                       image: _image != null ? _image!.path : '',
                       age: int.parse(ageController.text),
+                      breed: breedController.text,
                     ),
                   );
                 });
@@ -163,30 +188,40 @@ class _PetProfilePageState extends State<PetProfilePage> {
         TextEditingController(text: pet.name);
     TextEditingController ageEditController =
         TextEditingController(text: pet.age.toString());
+    TextEditingController(text: pet.breed);
 
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: Text('Update Pet Details'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildImagePicker(),
-              TextField(
-                controller: nameEditController,
-                decoration: InputDecoration(
-                  labelText: 'Name',
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _buildImagePicker(),
+                TextField(
+                  controller: nameEditController,
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                  ),
                 ),
-              ),
-              TextField(
-                controller: ageEditController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Age',
+                TextField(
+                  controller: ageEditController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'Age',
+                  ),
                 ),
-              ),
-            ],
+                TextField(
+                  controller: breedController,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    labelText: 'Breed',
+                  ),
+                ),
+              ],
+            ),
           ),
           actions: [
             TextButton(
@@ -202,6 +237,7 @@ class _PetProfilePageState extends State<PetProfilePage> {
                   pet.name = nameEditController.text;
                   pet.age = int.parse(ageEditController.text);
                   pet.image = _image != null ? _image!.path : pet.image;
+                  pet.breed = breedController.text;
                 });
                 Navigator.pop(context);
               },
