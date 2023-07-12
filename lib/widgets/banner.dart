@@ -22,7 +22,7 @@ class HomeBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
-        height: 300, // Customize the height of the slideshow
+        height: 230, // Customize the height of the slideshow
         autoPlay: true, // Enable auto play
         aspectRatio:
             16 / 9, // Customize the aspect ratio of the slideshow items

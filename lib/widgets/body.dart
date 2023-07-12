@@ -10,9 +10,9 @@ import '../all_pages/page6.dart';
 import '../all_pages/page7.dart';
 import '../all_pages/page8.dart';
 import '../all_pages/page9.dart';
-import '../all_pages/page10.dart';
-import '../all_pages/page11.dart';
-import '../all_pages/page12.dart';
+// import '../all_pages/page10.dart';
+// import '../all_pages/page11.dart';
+// import '../all_pages/page12.dart';
 import 'banner.dart';
 import '../screens/home_screen.dart';
 
@@ -31,9 +31,9 @@ final List<Widget> pages = [
   page7(),
   page8(),
   page9(),
-  page10(),
-  page11(),
-  page12(),
+  // page10(),
+  // page11(),
+  // page12(),
 ];
 
 class _BodyState extends State<Body> {
@@ -46,32 +46,29 @@ class _BodyState extends State<Body> {
         children: [
           HomeBanner(size: size),
           SizedBox(
-            height: 8,
+            height: 1,
           ),
           Expanded(
             child: GridView.count(
               shrinkWrap: true,
               crossAxisCount: 3,
               children: List.generate(
-                12,
+                9,
                 (index) {
                   List<String> itemNames = [
                     'E-Channel',
                     'Shop',
                     'tracking',
-                    'saloon',
-                    'photograpy',
-                    'Timer',
                     'Food',
-                    'Name 8',
-                    'Name 9',
-                    'Name 10',
-                    'Name 11',
-                    'Name 12',
+                    'photograpy',
+                    'Saloon',
+                    'Timer',
+                    'vaccine',
+                    'Donation',
                   ];
                   return GestureDetector(
                     onTap: () {
-                      if (index < 12) {
+                      if (index < 9) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
