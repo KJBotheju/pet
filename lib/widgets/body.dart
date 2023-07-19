@@ -24,7 +24,7 @@ class Body extends StatefulWidget {
 final List<Widget> pages = [
   Page1(),
   page2(),
-  page3(),
+  Page3(),
   page4(),
   page5(),
   page6(),
