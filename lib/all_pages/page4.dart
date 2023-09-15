@@ -11,7 +11,7 @@ class page4 extends StatefulWidget {
 
 class _page4State extends State<page4> {
   List<String> items = [
-    'Food Shop',
+    '',
   ];
 
   List<String> shop_link = [

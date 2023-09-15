@@ -61,7 +61,7 @@ class _BodyState extends State<Body> {
                     'tracking',
                     'Food',
                     'photograpy',
-                    'Saloon',
+                    'veterinary',
                     'Timer',
                     'vaccine',
                     'Donation',
