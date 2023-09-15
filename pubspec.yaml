@@ -103,6 +103,8 @@ flutter:
     - assets/aboutus/tharunya.jpg
     - assets/images/tracking_background.jpg
     - assets/images/petshop.jpeg
+    - assets/images/food.jpeg
+    - assets/images/petfood.jpeg
     
     
   #   - images/a_dot_ham.jpeg
