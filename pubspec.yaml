@@ -40,6 +40,7 @@ dependencies:
   shared_preferences: ^2.1.1
   url_launcher: ^6.1.11
   image_picker: ^0.8.7+4
+  
 
 
     
@@ -53,6 +54,7 @@ dependencies:
   geolocator: ^9.0.2
   flutter_google_places: ^0.3.0
   awesome_snackbar_content: ^0.1.1
+  fl_chart: ^0.62.0
 
 dev_dependencies:
   flutter_test:
@@ -114,6 +116,7 @@ flutter:
     - assets/images/d4.jpg
     - assets/images/d5.jpg
     - assets/images/d6.jpg
+    - assets/images/time.jpg
     
     
   #   - images/a_dot_ham.jpeg
