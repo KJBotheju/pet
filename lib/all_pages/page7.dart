@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import '../models/transaction.dart';
+import '../widgets/constant.dart';
 import './chart.dart';
 import './transaction_list.dart';
 import './new_transaction.dart';
@@ -78,15 +79,9 @@ class _page7State extends State<page7> {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     final appBar = AppBar(
-      title: Text(
-        'personal expenses',
-      ),
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.add),
-          onPressed: () => _startAddNewTransaction(context),
-        ),
-      ],
+      backgroundColor: kPrimaryColor,
+      foregroundColor: Colors.black,
+      title: Text('Time Spend'),
     );
     final txListWidget = Container(
       height: (mediaQuery.size.height -

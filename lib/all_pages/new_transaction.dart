@@ -75,7 +75,7 @@ class _NewTransactionState extends State<NewTransaction> {
             children: <Widget>[
               TextField(
                 decoration: InputDecoration(
-                  labelText: 'Title',
+                  labelText: 'Activity Name',
                 ),
                 controller: _titleController,
                 onSubmitted: (_) => _submitData(),
@@ -85,7 +85,7 @@ class _NewTransactionState extends State<NewTransaction> {
               ),
               TextField(
                 decoration: InputDecoration(
-                  labelText: 'Amount',
+                  labelText: 'Time(minutes)',
                 ),
                 controller: _amountController,
                 keyboardType: TextInputType.number,
@@ -122,7 +122,7 @@ class _NewTransactionState extends State<NewTransaction> {
                   backgroundColor: Theme.of(context).primaryColor,
                 ),
                 child: Text(
-                  'add transaction',
+                  'Add',
                   style: TextStyle(
                     color: Colors.white,
                   ),
