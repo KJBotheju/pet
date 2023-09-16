@@ -55,6 +55,9 @@ dependencies:
   flutter_google_places: ^0.3.0
   awesome_snackbar_content: ^0.1.1
   fl_chart: ^0.62.0
+  table_calendar: ^3.0.9
+  flutter_init: ^0.0.1
+  
 
 dev_dependencies:
   flutter_test:
