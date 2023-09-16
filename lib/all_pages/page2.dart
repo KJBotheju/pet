@@ -67,7 +67,6 @@ class _page2State extends State<page2> {
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
-                          backgroundColor: Colors.white.withOpacity(0.5),
 
                           // Set the text color for grid item
                           fontSize: 30.0, // Set the font size for grid item

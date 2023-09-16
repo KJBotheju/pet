@@ -34,9 +34,9 @@ class _page4State extends State<page4> {
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1, // Set the number of columns
-                mainAxisSpacing: 10.0,
+                mainAxisSpacing: 1.0,
                 childAspectRatio:
-                    0.6 // Set the vertical spacing between grid items
+                    1.4 // Set the vertical spacing between grid items
                 ),
             shrinkWrap:
                 true, // Allow the GridView to be scrollable within the SingleChildScrollView
@@ -47,7 +47,7 @@ class _page4State extends State<page4> {
               return Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/images/petfood.jpeg'),
+                      image: AssetImage('assets/images/sh.jpeg'),
                       fit: BoxFit.cover),
                 ),
                 // color: Color.fromARGB(255, 119, 187,
