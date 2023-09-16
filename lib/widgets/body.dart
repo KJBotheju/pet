@@ -143,19 +143,40 @@ class _BodyState extends State<Body> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => page2(),
+                      ),
+                    );
+                  },
                   icon: Icon(
                     Icons.maps_home_work,
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => page7(),
+                      ),
+                    );
+                  },
                   icon: Icon(
                     Icons.alarm_on,
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Page3(),
+                      ),
+                    );
+                  },
                   icon: Icon(
                     Icons.search,
                   ),

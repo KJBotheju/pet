@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import '../widgets/constant.dart';
 
 class page8 extends StatefulWidget {
   @override
@@ -17,6 +18,8 @@ class _page8State extends State<page8> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Vaccine Calendar'),
+        backgroundColor: kPrimaryColor,
+        foregroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
         child: Column(
