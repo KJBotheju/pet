@@ -58,8 +58,7 @@ dependencies:
   table_calendar: ^3.0.9
   flutter_init: ^0.0.1
   firebase_core: ^2.15.1
-  firebase_storage: ^11.2.6
-  cloud_firestore: ^4.9.1
+
   
 
 dev_dependencies:
@@ -123,6 +122,19 @@ flutter:
     - assets/images/d5.jpg
     - assets/images/d6.jpg
     - assets/images/time.jpg
+    - assets/images/banner1.jpeg
+    - assets/images/banner2.jpg
+    - assets/images/banner3.jpg
+    - assets/images/banner4.jpg
+    - assets/images/home0.jpg
+    - assets/images/home1.jpg
+    - assets/images/home2.jpg
+    - assets/images/home3.jpg
+    - assets/images/home4.jpg
+    - assets/images/home5.jpg
+    - assets/images/home6.jpg
+    - assets/images/home7.jpg
+    - assets/images/home8.jpg
     
     
   #   - images/a_dot_ham.jpeg

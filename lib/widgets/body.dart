@@ -41,7 +41,7 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(5),
       child: Column(
         children: [
           HomeBanner(size: size),
@@ -99,9 +99,10 @@ class _BodyState extends State<Body> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(16),
                             child: Image.asset(
-                              'assets/images/dog$index.jpg',
+                              'assets/images/home$index.jpg',
                               // Replace with your image asset path
                               fit: BoxFit.cover,
+                              height: 80,
                             ),
                           ),
                           SizedBox(height: 10),

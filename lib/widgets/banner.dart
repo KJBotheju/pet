@@ -13,16 +13,17 @@ class HomeBanner extends StatelessWidget {
   final Size size;
 
   List<Widget> slideshowItems = [
-    Image.asset('assets/images/dog0.jpg'),
-    Image.asset('assets/images/dog1.jpg'),
-    Image.asset('assets/images/dog2.jpg'),
+    Image.asset('assets/images/banner1.jpeg'),
+    Image.asset('assets/images/banner2.jpg'),
+    Image.asset('assets/images/banner3.jpg'),
+    Image.asset('assets/images/banner4.jpg'),
   ];
 
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
-        height: 230, // Customize the height of the slideshow
+        height: 200, // Customize the height of the slideshow
         autoPlay: true, // Enable auto play
         aspectRatio:
             16 / 9, // Customize the aspect ratio of the slideshow items
