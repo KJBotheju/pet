@@ -36,6 +36,7 @@ class _Page1State extends State<Page1> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
+        foregroundColor: Colors.black,
         title: Text('E-Channeling'),
       ),
       body: Padding(

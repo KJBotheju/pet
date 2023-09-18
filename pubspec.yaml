@@ -57,6 +57,9 @@ dependencies:
   fl_chart: ^0.62.0
   table_calendar: ^3.0.9
   flutter_init: ^0.0.1
+  firebase_core: ^2.15.1
+  firebase_storage: ^11.2.6
+  cloud_firestore: ^4.9.1
   
 
 dev_dependencies:

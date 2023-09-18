@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 import '../screens/aboutus_screen.dart';
 import '../screens/petprofile_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({
@@ -76,6 +77,15 @@ class AppDrawer extends StatelessWidget {
             },
             title: 'Pet Profile',
             icon: Icons.pets,
+          ),
+          MenuList(
+            press: () {
+              const url =
+                  'https://www.google.com'; // Replace with your desired URL
+              launch(url);
+            },
+            title: 'Neck Belt Tracker',
+            icon: Icons.track_changes_rounded,
           ),
           MenuList(
             press: () {
