@@ -39,6 +39,8 @@ final List<Widget> pages = [
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final carouselHeight = screenHeight * 0.1; // 80% of the screen height
     Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(5),
@@ -102,7 +104,7 @@ class _BodyState extends State<Body> {
                               'assets/images/home$index.jpg',
                               // Replace with your image asset path
                               fit: BoxFit.cover,
-                              height: 80,
+                              height: carouselHeight,
                             ),
                           ),
                           SizedBox(height: 10),

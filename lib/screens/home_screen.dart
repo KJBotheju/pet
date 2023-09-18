@@ -15,26 +15,30 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBgColor,
-      appBar: AppBar(
-        backgroundColor: kPrimaryColor,
-        // elevation: 0,
-        title: Text(
-          'Pet Care',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
+        backgroundColor: kBgColor,
+        appBar: AppBar(
+          backgroundColor: kPrimaryColor,
+          // elevation: 0,
+          title: Text(
+            'Pet Care',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          centerTitle: true,
+          // actions: [
+          //   CircleAvatar(
+          //     backgroundColor: kPrimaryColor,
+          //   ),
+          // ],
         ),
-        centerTitle: true,
-        // actions: [
-        //   CircleAvatar(
-        //     backgroundColor: kPrimaryColor,
-        //   ),
-        // ],
-      ),
-      body: Body(),
-      drawer: AppDrawer(),
-    );
+        body: Body(),
+        drawer: Drawer(
+          child: Container(
+            color: Colors.black,
+            child: AppDrawer(),
+          ),
+        ));
   }
 }

@@ -21,9 +21,11 @@ class HomeBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final carouselHeight = screenHeight * 0.3; // 80% of the screen height
     return CarouselSlider(
       options: CarouselOptions(
-        height: 200, // Customize the height of the slideshow
+        height: carouselHeight, // Customize the height of the slideshow
         autoPlay: true, // Enable auto play
         aspectRatio:
             16 / 9, // Customize the aspect ratio of the slideshow items
