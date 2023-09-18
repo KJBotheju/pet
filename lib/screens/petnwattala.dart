@@ -4,19 +4,19 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class Petvetclinic extends StatefulWidget {
+class Petnwattala extends StatefulWidget {
   @override
-  State<Petvetclinic> createState() => _PetvetclinicState();
+  State<Petnwattala> createState() => _PetnwattalaState();
 }
 
-class _PetvetclinicState extends State<Petvetclinic> {
+class _PetnwattalaState extends State<Petnwattala> {
   final Completer<GoogleMapController> _controller = Completer();
 
   static const CameraPosition initialPosition = CameraPosition(
-      target: LatLng(6.8931998591168995, 79.87375660068321), zoom: 14.0);
+      target: LatLng(6.981727517713923, 79.88865157126247), zoom: 14.0);
 
   static const CameraPosition targetPosition = CameraPosition(
-      target: LatLng(6.8931998591168995, 79.87375660068321),
+      target: LatLng(6.981727517713923, 79.88865157126247),
       zoom: 20.0,
       bearing: 192.0,
       tilt: 60);
@@ -25,7 +25,7 @@ class _PetvetclinicState extends State<Petvetclinic> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Petvet Clinic"),
+        title: const Text("Pet n Doc Wattala"),
         centerTitle: true,
       ),
       body: GoogleMap(

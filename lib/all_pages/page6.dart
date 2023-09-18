@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:pet/screens/petvetclinic.dart';
-
+import 'package:pet/screens/petnwattala.dart';
+import 'package:pet/screens/royalanimal.dart';
 import '../widgets/constant.dart';
 
 class page6 extends StatefulWidget {
@@ -66,11 +67,17 @@ class _page6State extends State<page6> {
   }
 
   void goToButton2() {
-    // Implement the action for Button 2
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
+      return Petnwattala();
+    }));
   }
 
   void goToButton3() {
-    // Implement the action for Button 3
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
+      return Royalanimal();
+    }));
   }
 
   // Add more methods for other buttons
