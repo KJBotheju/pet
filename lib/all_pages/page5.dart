@@ -11,19 +11,19 @@ class page5 extends StatefulWidget {
 
 class _page5State extends State<page5> {
   List<String> items = [
-    'kavinda photography',
-    'rakshitha photography',
-    'tharushi photography',
-    'malki photography',
-    'durandi photography',
+    'Pet Photography.Lk',
+    'Global PET Photography',
+    'PhotoGraphy sri lanka',
+    'Pet Photography Paradise',
+    'Furrever Pet Photography',
   ];
 
   List<String> photography_link = [
-    'https://www.facebook.com/profile.php?id=100008703646884&mibextid=ZbWKwL',
-    'https://github.com/KJBotheju',
-    'https://www.google.com',
-    'https://www.facebook.com/malki.samarasekara.5?mibextid=ZbWKwL',
-    'https://www.facebook.com/',
+    'https://web.facebook.com/profile.php?id=100087300854371',
+    'https://web.facebook.com/profile.php?id=100069821091916',
+    'https://web.facebook.com/profile.php?id=100071578476136',
+    'https://web.facebook.com/profile.php?id=61551404032849',
+    'https://web.facebook.com/FurreverPetPhotography',
   ];
 
   @override

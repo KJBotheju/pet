@@ -34,18 +34,18 @@ class _page6State extends State<page6> {
             },
           ),
           MyGridButton(
-            text: 'Button 2',
+            text: 'Pet n Doc Wattala',
             imageAsset:
-                'assets/images/dog1.jpg', // Specify the image path for this button
+                'assets/images/petclinic2.JPG', // Specify the image path for this button
             onPressed: () {
               // Call the method for Button 2
               goToButton2();
             },
           ),
           MyGridButton(
-            text: 'Button 3',
+            text: 'Royal Animal Clinic',
             imageAsset:
-                'assets/images/dog2.jpg', // Specify the image path for this button
+                'assets/images/petvetshop2.JPG', // Specify the image path for this button
             onPressed: () {
               // Call the method for Button 3
               goToButton3();
