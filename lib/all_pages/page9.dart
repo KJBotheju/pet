@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 import '../widgets/constant.dart';
@@ -64,19 +66,19 @@ class _page9State extends State<page9> {
               ),
               SizedBox(height: 10),
               Text(
-                'Bank Name: Your Bank Name',
+                'Bank Name: BOC Bank',
                 style: TextStyle(fontSize: 16),
               ),
               Text(
-                'Branch: Bank branch',
+                'Branch: Kelaniya',
                 style: TextStyle(fontSize: 16),
               ),
               Text(
-                'Account Name: Your Account Name',
+                'Account Name: Rakshitha',
                 style: TextStyle(fontSize: 16),
               ),
               Text(
-                'Account Number: Your Account Number',
+                'Account Number: 86975236',
                 style: TextStyle(fontSize: 16),
               ),
               SizedBox(height: 20),

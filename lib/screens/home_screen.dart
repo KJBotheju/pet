@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: kPrimaryColor,
           // elevation: 0,
           title: Text(
-            'Pet Care',
+            'Baww',
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,

@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: prefer_const_constructors
 
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -21,16 +21,34 @@ class _SimpleMapScreenState extends State<SimpleMapScreen> {
       bearing: 192.0,
       tilt: 60);
 
+  Set<Marker> _markers = {}; // Define a set of markers
+
+  @override
+  void initState() {
+    super.initState();
+    _markers.add(
+      Marker(
+        markerId: MarkerId("myPetLocation"), // A unique ID for the marker
+        position:
+            LatLng(6.970193220667125, 79.9051577177291), // The target location
+        infoWindow:
+            InfoWindow(title: "My_Pet_Location"), // Optional info window
+        // You can customize the marker's icon here if needed
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Google Map"),
+        title: const Text("Pet Location"),
         centerTitle: true,
       ),
       body: GoogleMap(
         initialCameraPosition: initialPosition,
         mapType: MapType.normal,
+        markers: _markers, // Add the markers here
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },

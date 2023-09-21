@@ -62,7 +62,7 @@ class AuthScreen extends StatelessWidget {
                         ],
                       ),
                       child: Text(
-                        'PetCare',
+                        'Baww',
                         style: TextStyle(
                           color: Theme.of(context)
                               .accentTextTheme

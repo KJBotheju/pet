@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: prefer_const_constructors
 
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -21,6 +21,22 @@ class _PetvetclinicState extends State<Petvetclinic> {
       bearing: 192.0,
       tilt: 60);
 
+  Set<Marker> _markers = {}; // Define a set of markers
+
+  @override
+  void initState() {
+    super.initState();
+    _markers.add(
+      Marker(
+        markerId: MarkerId("petvet_clinic"), // A unique ID for the marker
+        position: LatLng(
+            6.8931998591168995, 79.87375660068321), // The target location
+        infoWindow: InfoWindow(title: "Petvet Clinic"), // Optional info window
+        // You can customize the marker's icon here if needed
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +47,7 @@ class _PetvetclinicState extends State<Petvetclinic> {
       body: GoogleMap(
         initialCameraPosition: initialPosition,
         mapType: MapType.normal,
+        markers: _markers, // Add the markers here
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
