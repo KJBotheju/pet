@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
             accentColor: Colors.deepOrange,
             fontFamily: 'Lato',
           ),
-          home: HomeScreen(),
-          /* home: auth.isAuth
+          //home: HomeScreen(),
+          home: auth.isAuth
               ? HomeScreen()
               : FutureBuilder(
                   future: auth.tryAutoLogin(),
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
                           ? SplashScreen()
                           : AuthScreen(),
                 ),
-          routes: {},*/
+          routes: {},
         ),
       ),
     );
