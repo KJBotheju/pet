@@ -1,11 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import '../models/transaction.dart';
 import '../widgets/constant.dart';
 import './chart.dart';
 import './transaction_list.dart';
 import './new_transaction.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class page7 extends StatefulWidget {
   @override
@@ -13,20 +14,7 @@ class page7 extends StatefulWidget {
 }
 
 class _page7State extends State<page7> {
-  final List<Transaction> _userTransaction = [
-    /*Transaction(
-      id: 't1',
-      title: 'new shoes',
-      amount: 45.55,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'weekly groceries',
-      amount: 65.21,
-      date: DateTime.now(),
-    ),*/
-  ];
+  final List<Transaction> _userTransaction = [];
 
   bool _showChart = false;
 
@@ -40,17 +28,39 @@ class _page7State extends State<page7> {
     }).toList();
   }
 
-  void _addNewTransaction(
-      String txTitle, double txAmount, DateTime chosenDate) {
+  Future<void> _addNewTransaction(
+      String txTitle, double txAmount, DateTime chosenDate) async {
     final newTx = Transaction(
-        title: txTitle,
-        amount: txAmount,
-        date: chosenDate,
-        id: DateTime.now().toString());
+      title: txTitle,
+      amount: txAmount,
+      date: chosenDate,
+      id: DateTime.now().toString(),
+    );
 
-    setState(() {
-      _userTransaction.add(newTx);
-    });
+    // Convert the transaction data to a JSON format
+    final jsonData = {
+      'title': newTx.title,
+      'amount': newTx.amount,
+      'date': newTx.date.toIso8601String(),
+    };
+
+    final response = await http.post(
+      Uri.parse(
+          'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/time.json'), // Append ".json" here
+      body: json.encode(jsonData),
+    );
+
+    if (response.statusCode == 200) {
+      // Successfully added to Firebase
+      setState(() {
+        _userTransaction.add(newTx);
+      });
+    } else {
+      // Handle the error, e.g., display an error message and debug information
+      print('Failed to add transaction to Firebase');
+      print('Response Status Code: ${response.statusCode}');
+      print('Response Body: ${response.body}');
+    }
   }
 
   void _startAddNewTransaction(BuildContext ctx) {
