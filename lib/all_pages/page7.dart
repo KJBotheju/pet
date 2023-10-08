@@ -46,7 +46,7 @@ class _page7State extends State<page7> {
 
     final response = await http.post(
       Uri.parse(
-          'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/time.json'), // Append ".json" here
+          'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/time/user.json'), // Append ".json" here
       body: json.encode(jsonData),
     );
 
