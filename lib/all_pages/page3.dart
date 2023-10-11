@@ -5,6 +5,7 @@ import '../screens/currentLocation_screen.dart';
 import '../screens/searchPlace_screen.dart';
 import '../screens/simpleMap_screen.dart';
 import '../widgets/constant.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Page3 extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _Page3State extends State<Page3> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
+            /*ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) {
@@ -94,9 +95,70 @@ class _Page3State extends State<Page3> {
                 ),
               ),
             ),
+            SizedBox(height: 20),*/
+
+            ElevatedButton(
+              onPressed: () {
+                _openMessagingAppToBind();
+              },
+              child: Text(
+                "Bind with pet tracker",
+                style: TextStyle(fontSize: 20),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blue, // Customize the button color
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                _openMessagingApp();
+              },
+              child: Text(
+                "Pet Location",
+                style: TextStyle(fontSize: 20),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.purple, // Customize the button color
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
+  }
+}
+
+void _openMessagingApp() async {
+  final recipient = "0723057778"; // Replace with the recipient's phone number
+  final message = "777"; // Replace with your message
+
+  final url = "sms:$recipient?body=$message";
+
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+void _openMessagingAppToBind() async {
+  final recipient = "0723057778"; // Replace with the recipient's phone number
+  final message = "000"; // Replace with your message
+
+  final url = "sms:$recipient?body=$message";
+
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
