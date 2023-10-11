@@ -59,7 +59,7 @@ class AboutUs extends StatelessWidget {
               ),
               SizedBox(height: 20.0),
               Text(
-                'Pet Care',
+                'Baww',
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
