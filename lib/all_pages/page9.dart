@@ -95,7 +95,7 @@ class _page9State extends State<page9> {
                 style: TextStyle(fontSize: 16),
               ),
               Text(
-                '2. You can also contact us at contact@example.com for food donations and other inquiries.',
+                '2. You can also contact us at petcare@gmail.com for food donations and other inquiries.',
                 style: TextStyle(fontSize: 16),
               ),
               SizedBox(height: 10),
