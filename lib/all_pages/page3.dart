@@ -1,11 +1,8 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import '../screens/currentLocation_screen.dart';
-import '../screens/searchPlace_screen.dart';
-import '../screens/simpleMap_screen.dart';
-import '../widgets/constant.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:pet/widgets/constant.dart';
 
 class Page3 extends StatefulWidget {
   @override
@@ -13,90 +10,22 @@ class Page3 extends StatefulWidget {
 }
 
 class _Page3State extends State<Page3> {
+  TextEditingController recipientController = TextEditingController();
+  final String defaultTrackingMessage = "777"; // Default trackinglink message
+  final String defaultBindMessage = "000"; // Default bind message
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Tracking'),
         backgroundColor: kPrimaryColor,
-        foregroundColor: Colors.black, // Customize the app bar color
+        foregroundColor: Colors.black,
       ),
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/tracking_background.jpg"),
-            fit: BoxFit.fill,
-          ),
-        ),
-        // Customize the background color
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            /*ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return SimpleMapScreen();
-                  },
-                ));
-              },
-              child: Text(
-                "Simple Map",
-                style: TextStyle(fontSize: 20),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.green, // Customize the button color
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return CurrentLocationScreen();
-                  },
-                ));
-              },
-              child: Text(
-                "Current Location",
-                style: TextStyle(fontSize: 20),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.blue, // Customize the button color
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return SearchPlaceScreen();
-                  },
-                ));
-              },
-              child: Text(
-                "Search Place",
-                style: TextStyle(fontSize: 20),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.purple, // Customize the button color
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),*/
-
             ElevatedButton(
               onPressed: () {
                 _openMessagingAppToBind();
@@ -106,7 +35,7 @@ class _Page3State extends State<Page3> {
                 style: TextStyle(fontSize: 20),
               ),
               style: ElevatedButton.styleFrom(
-                primary: Colors.blue, // Customize the button color
+                primary: Colors.blue,
                 padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -123,42 +52,53 @@ class _Page3State extends State<Page3> {
                 style: TextStyle(fontSize: 20),
               ),
               style: ElevatedButton.styleFrom(
-                primary: Colors.purple, // Customize the button color
+                primary: Colors.purple,
                 padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),
+            SizedBox(height: 20),
+            TextField(
+              controller: recipientController,
+              decoration: InputDecoration(labelText: 'Enter Phone Number'),
+            ),
           ],
         ),
       ),
     );
   }
-}
 
-void _openMessagingApp() async {
-  final recipient = "0723057778"; // Replace with the recipient's phone number
-  final message = "777"; // Replace with your message
+  void _openMessagingApp() async {
+    final recipient = recipientController.text;
+    final message = defaultTrackingMessage;
 
-  final url = "sms:$recipient?body=$message";
+    final url = "sms:$recipient?body=$message";
 
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
-}
 
-void _openMessagingAppToBind() async {
-  final recipient = "0723057778"; // Replace with the recipient's phone number
-  final message = "000"; // Replace with your message
+  void _openMessagingAppToBind() async {
+    final recipient = recipientController.text;
+    final message = defaultBindMessage;
 
-  final url = "sms:$recipient?body=$message";
+    final url = "sms:$recipient?body=$message";
 
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  @override
+  void dispose() {
+    recipientController.dispose();
+    super.dispose();
   }
 }
