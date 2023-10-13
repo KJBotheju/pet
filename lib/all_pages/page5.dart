@@ -37,7 +37,7 @@ class _page5State extends State<page5> {
       messengerLink:
           'messenger://user?user_id=54321', // Replace with the Messenger link
       images: [
-        'assets/photograpy/photograpy3.jpg',
+        'assets/photograpy/photograpy2.jpg',
       ],
     ),
     // Add more photographers with their details
