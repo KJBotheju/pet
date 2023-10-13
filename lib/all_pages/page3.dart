@@ -11,8 +11,7 @@ class Page3 extends StatefulWidget {
 
 class _Page3State extends State<Page3> {
   TextEditingController recipientController = TextEditingController();
-  final String defaultTrackingMessage = "777"; // Default trackinglink message
-  final String defaultBindMessage = "000"; // Default bind message
+  final String defaultTrackingMessage = ""; // Default trackinglink message
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +25,6 @@ class _Page3State extends State<Page3> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                _openMessagingAppToBind();
-              },
-              child: Text(
-                "Bind with pet tracker",
-                style: TextStyle(fontSize: 20),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.blue,
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 _openMessagingApp();
@@ -60,10 +42,14 @@ class _Page3State extends State<Page3> {
               ),
             ),
             SizedBox(height: 20),
-            TextField(
-              controller: recipientController,
-              decoration: InputDecoration(labelText: 'Enter Phone Number'),
-            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: 16.0), // Adjust the horizontal padding as needed
+              child: TextField(
+                controller: recipientController,
+                decoration: InputDecoration(labelText: 'Enter Phone Number'),
+              ),
+            )
           ],
         ),
       ),
@@ -73,19 +59,6 @@ class _Page3State extends State<Page3> {
   void _openMessagingApp() async {
     final recipient = recipientController.text;
     final message = defaultTrackingMessage;
-
-    final url = "sms:$recipient?body=$message";
-
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  void _openMessagingAppToBind() async {
-    final recipient = recipientController.text;
-    final message = defaultBindMessage;
 
     final url = "sms:$recipient?body=$message";
 
