@@ -11,7 +11,8 @@ class Page3 extends StatefulWidget {
 
 class _Page3State extends State<Page3> {
   TextEditingController recipientController = TextEditingController();
-  final String defaultTrackingMessage = ""; // Default trackinglink message
+  bool showParagraph = false;
+  String buttonText = "How To Track My Pet";
 
   @override
   Widget build(BuildContext context) {
@@ -21,36 +22,67 @@ class _Page3State extends State<Page3> {
         backgroundColor: kPrimaryColor,
         foregroundColor: Colors.black,
       ),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                _openMessagingApp();
-              },
-              child: Text(
-                "Pet Location",
-                style: TextStyle(fontSize: 20),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.purple,
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+      body: SingleChildScrollView(
+        // Wrap the content in a SingleChildScrollView
+        child: Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  _openMessagingApp();
+                },
+                child: Text(
+                  "Pet Location",
+                  style: TextStyle(fontSize: 20),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: 16.0), // Adjust the horizontal padding as needed
-              child: TextField(
+              SizedBox(height: 20),
+              TextField(
                 controller: recipientController,
                 decoration: InputDecoration(labelText: 'Enter Phone Number'),
               ),
-            )
-          ],
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    showParagraph = !showParagraph;
+                    buttonText =
+                        showParagraph ? "Close" : "How To Track My Pet";
+                  });
+                },
+                child: Text(
+                  buttonText,
+                  style: TextStyle(fontSize: 20),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: showParagraph,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    "Steps\n\n(1). Enter the phone number that you want to track.\n\n(2). Click the Pet Location button.\n\n(3). Type '000' and send an SMS (Bind with sim).\n\n(4). After successfully binding, you'll receive a message.\n\n(5). Type '777' and send a message. After that, you'll get a link.\n\n(6). Enter that link so that you can see the exact location of your pet.",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -58,9 +90,8 @@ class _Page3State extends State<Page3> {
 
   void _openMessagingApp() async {
     final recipient = recipientController.text;
-    final message = defaultTrackingMessage;
 
-    final url = "sms:$recipient?body=$message";
+    final url = "sms:$recipient";
 
     if (await canLaunch(url)) {
       await launch(url);
