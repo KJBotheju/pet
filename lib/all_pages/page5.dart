@@ -13,30 +13,31 @@ class _page5State extends State<page5> {
       name: 'Pet Photography.Lk',
       description: 'Capturing precious moments of your pets.',
       profileLink: 'https://web.facebook.com/profile.php?id=100087300854371',
+      messengerLink:
+          'messenger://user?user_id=12345', // Replace with the Messenger link
       images: [
         'assets/photograpy/photograpy0.jpg',
-        'assets/photograpy/photograpy1.jpg',
-        'assets/photograpy/photograpy2.jpg',
       ],
     ),
     Photographer(
       name: 'Global PET Photography',
       description: 'Creating memories with pets from around the world.',
       profileLink: 'https://web.facebook.com/profile.php?id=100069821091916',
+      messengerLink:
+          'messenger://user?user_id=67890', // Replace with the Messenger link
       images: [
         'assets/photograpy/photograpy4.jpg',
-        'assets/photograpy/photograpy1.jpg',
-        'assets/photograpy/photograpy2.jpg',
       ],
     ),
     Photographer(
-      name: 'Global PET Photography',
-      description: 'Creating memories with pets from around the world.',
-      profileLink: 'https://web.facebook.com/profile.php?id=100069821091916',
+      name: 'Another Photographer',
+      description: 'Photography description here.',
+      profileLink:
+          'https://web.facebook.com/anotherprofile', // Replace with the Facebook profile link
+      messengerLink:
+          'messenger://user?user_id=54321', // Replace with the Messenger link
       images: [
-        'assets/photograpy/photograpy1.jpg',
-        'assets/photograpy/photograpy0.jpg',
-        'assets/photograpy/photograpy2.jpg',
+        'assets/photograpy/photograpy3.jpg',
       ],
     ),
     // Add more photographers with their details
@@ -64,12 +65,14 @@ class Photographer {
   final String name;
   final String description;
   final String profileLink;
+  final String messengerLink; // New Messenger link
   final List<String> images;
 
   Photographer({
     required this.name,
     required this.description,
     required this.profileLink,
+    required this.messengerLink,
     required this.images,
   });
 }
@@ -108,7 +111,8 @@ class PhotographerCard extends StatelessWidget {
               ),
               ElevatedButton.icon(
                 onPressed: () {
-                  // Add code to open Messenger or another messaging app
+                  _launchMessenger(
+                      photographer.messengerLink); // Open Messenger link
                 },
                 icon: Icon(Icons.messenger),
                 label: Text('Connect with Me'),
@@ -118,5 +122,15 @@ class PhotographerCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _launchMessenger(String messengerLink) async {
+    final canLaunchMessenger = await canLaunch(messengerLink);
+
+    if (canLaunchMessenger) {
+      await launch(messengerLink);
+    } else {
+      print("Messenger cannot be launched.");
+    }
   }
 }
