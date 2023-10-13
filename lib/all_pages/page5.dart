@@ -10,13 +10,13 @@ class page5 extends StatefulWidget {
 class _page5State extends State<page5> {
   List<Photographer> photographers = [
     Photographer(
-      name: 'Pet Photography.Lk',
-      description: 'Capturing precious moments of your pets.',
-      profileLink: 'https://web.facebook.com/profile.php?id=100087300854371',
+      name: 'NU pet studio',
+      description: 'Contact: 0704449500',
+      profileLink: 'https://www.facebook.com/NuPetStudio/',
       messengerLink:
-          'messenger://user?user_id=12345', // Replace with the Messenger link
+          'https://api.whatsapp.com/send?phone=%2B94704449500&data=ARCyU5UAEurlr1I87EbAGK79s0x43vrrRnUMGM_mJM5GY8i7qFyyk4cieknzBV-rFUvsr2jwoLLti_kgiAfHvA-JTdLFK1_vD6Noil3Ab-LUqMAfaqLRPWOiZY7FGGACgaTdfofPXGhbx3ebz6ZPhJc0og&source=FB_Page&app=facebook&entry_point=page_cta', // Replace with the Messenger link
       images: [
-        'assets/photograpy/photograpy0.jpg',
+        'assets/photograpy/nupetstudio.jpg',
       ],
     ),
     Photographer(
@@ -106,6 +106,9 @@ class PhotographerCard extends StatelessWidget {
                 onPressed: () {
                   launch(photographer.profileLink);
                 },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                ),
                 icon: Icon(Icons.facebook),
                 label: Text('View Profile'),
               ),
@@ -114,6 +117,9 @@ class PhotographerCard extends StatelessWidget {
                   _launchMessenger(
                       photographer.messengerLink); // Open Messenger link
                 },
+                style: ElevatedButton.styleFrom(
+                  primary: Color.fromARGB(255, 2, 86, 154),
+                ),
                 icon: Icon(Icons.messenger),
                 label: Text('Connect with Me'),
               ),
