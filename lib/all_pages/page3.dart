@@ -76,7 +76,7 @@ class _Page3State extends State<Page3> {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    "Steps\n\n(1). Enter the phone number that you want to track.\n\n(2). Click the Pet Location button.\n\n(3). Type '000' and send an SMS (Bind with sim).\n\n(4). After successfully binding, you'll receive a message.\n\n(5). Type '777' and send a message. After that, you'll get a link.\n\n(6). Enter that link so that you can see the exact location of your pet.",
+                    "Steps\n\n(1). Enter the phone number you want to track.\n\n(2). Click the 'Pet Location' button.\n\n(3). Type '000' and send an SMS (ensure it's bound with the SIM card).\n\n(4). After successful binding, you will receive a message.\n\n(5). Type '777' and send a message; you will receive a link shotly.\n\n(6). Open the link to view your pet's exact location.",
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
