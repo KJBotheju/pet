@@ -1,7 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'api_service.dart';
 import '../widgets/constant.dart';
 
@@ -12,24 +9,7 @@ class Page1 extends StatefulWidget {
 
 class _Page1State extends State<Page1> {
   String? selectedDoctorId;
-  DateTime selectedDate = DateTime.now();
-
-  Future<void> bookAppointment() async {
-    if (selectedDoctorId == null || selectedDate == null) {
-      Fluttertoast.showToast(msg: 'Please select doctor and date');
-      return;
-    }
-
-    final result =
-        await APIService.bookAppointment(selectedDoctorId!, selectedDate);
-
-    if (result['success']) {
-      Fluttertoast.showToast(msg: result['message']);
-      // Handle successful booking, e.g., navigate to confirmation screen
-    } else {
-      Fluttertoast.showToast(msg: result['message']);
-    }
-  }
+  Doctor? selectedDoctor;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +17,7 @@ class _Page1State extends State<Page1> {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         foregroundColor: Colors.black,
-        title: Text('E-Channeling'),
+        title: Text('Select Doctor'),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -50,6 +30,7 @@ class _Page1State extends State<Page1> {
               onChanged: (newValue) {
                 setState(() {
                   selectedDoctorId = newValue;
+                  selectedDoctor = getDoctorById(newValue);
                 });
               },
               items: [
@@ -64,34 +45,76 @@ class _Page1State extends State<Page1> {
                 // Add more doctors as needed
               ],
             ),
-            SizedBox(height: 16.0),
-            TextButton(
-              onPressed: () async {
-                final pickedDate = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime.now(),
-                  lastDate: DateTime.now().add(Duration(days: 30)),
-                );
-
-                if (pickedDate != null) {
-                  setState(() {
-                    selectedDate = pickedDate;
-                  });
-                }
-              },
-              child: Text(selectedDate != null
-                  ? 'Selected Date: ${selectedDate.toString()}'
-                  : 'Select Date'),
-            ),
-            SizedBox(height: 16.0),
-            TextButton(
-              onPressed: bookAppointment,
-              child: Text('Book Appointment'),
-            ),
+            if (selectedDoctor != null)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Doctor Name: ${selectedDoctor!.name}'),
+                  Text('Specialization: ${selectedDoctor!.specialization}'),
+                  Text('Doctor Fee: \$${selectedDoctor!.doctorFee.toString()}'),
+                  Text(
+                      'Appointment Fee: \$${selectedDoctor!.appointmentFee.toString()}'),
+                  Text('Available Time Slots:'),
+                  for (var slot in selectedDoctor!.availableTimeSlots)
+                    Text(slot),
+                ],
+              ),
           ],
         ),
       ),
     );
   }
+
+  Doctor getDoctorById(String? doctorId) {
+    final doctor = doctors.firstWhere(
+      (doctor) => doctor.id == doctorId,
+      orElse: () => Doctor(
+        id: '',
+        name: 'Unknown Doctor',
+        specialization: 'Unknown Specialization',
+        doctorFee: 0.0,
+        appointmentFee: 0.0,
+        availableTimeSlots: [],
+      ),
+    );
+    return doctor;
+  }
 }
+
+class Doctor {
+  final String id;
+  final String name;
+  final String specialization;
+  final double doctorFee;
+  final double appointmentFee;
+  final List<String> availableTimeSlots;
+
+  Doctor({
+    required this.id,
+    required this.name,
+    required this.specialization,
+    required this.doctorFee,
+    required this.appointmentFee,
+    required this.availableTimeSlots,
+  });
+}
+
+final List<Doctor> doctors = [
+  Doctor(
+    id: 'doctor1',
+    name: 'Doctor 1',
+    specialization: 'Specialization 1',
+    doctorFee: 100,
+    appointmentFee: 50,
+    availableTimeSlots: ['9:00 AM', '10:00 AM', '11:00 AM'],
+  ),
+  Doctor(
+    id: 'doctor2',
+    name: 'Doctor 2',
+    specialization: 'Specialization 2',
+    doctorFee: 120,
+    appointmentFee: 60,
+    availableTimeSlots: ['2:00 PM', '3:00 PM', '4:00 PM'],
+  ),
+  // Add more doctors as needed
+];
