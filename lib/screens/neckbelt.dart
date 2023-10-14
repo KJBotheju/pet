@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:pet/widgets/constant.dart';
 
 class NeckBeltPage extends StatefulWidget {
   @override
@@ -10,82 +13,110 @@ class _NeckBeltPageState extends State<NeckBeltPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('NeckBelt Tracker'),
+        title: Text('NeckBelt'),
+        backgroundColor: kPrimaryColor,
+        foregroundColor: Colors.black,
       ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Center(
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Container(
+              padding: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Center(
+                child: Text(
+                  'NeckBelt Tracker',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
               child: Text(
-                'NeckBelt Tracker',
+                'The NeckBelt Tracker is a stylish collar for your beloved pet, equipped with a cutting-edge tracker. If your furry friend ever goes missing, this smart collar and app combo will help you quickly locate and reunite with your four-legged family member.',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 18,
+                ),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'How to Buy:',
+                style: TextStyle(
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'The NeckBelt Tracker is an advanced wearable device designed to track your daily activities and monitor your health.',
-              style: TextStyle(
-                fontSize: 16,
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'You can purchase the NeckBelt Tracker by contacting us.\n\nEmail: Petcare@gmail.com\nPhone: 0771569872',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'How to Buy:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'Price: \$99.99',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'You can purchase the NeckBelt Tracker from our official website or visit our nearest store.',
-              style: TextStyle(
-                fontSize: 16,
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'Images:',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'Price: \$99.99',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+          SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // Two columns
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'Images:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Image.asset(
-              'assets/images/dog0.jpg', // Replace with the actual image file path
-              width: 200,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Image.asset(
-              'assets/images/dog1.jpg', // Replace with the actual image file path
-              width: 200,
+            delegate: SliverChildListDelegate(
+              [
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Image.asset(
+                    'assets/images/dog0.jpg',
+                    width: 200,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Image.asset(
+                    'assets/images/dog1.jpg',
+                    width: 200,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
