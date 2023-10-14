@@ -37,11 +37,11 @@ class _Page1State extends State<Page1> {
               items: [
                 DropdownMenuItem(
                   value: 'doctor1',
-                  child: Text('Doctor 1'),
+                  child: Text('Dr. Nihal Peeris'),
                 ),
                 DropdownMenuItem(
                   value: 'doctor2',
-                  child: Text('Doctor 2'),
+                  child: Text('Dr. Shamith Dilshan'),
                 ),
                 // Add more doctors as needed
               ],
@@ -96,7 +96,7 @@ class _Page1State extends State<Page1> {
                       ),
                     ),
                     Text(
-                      '${selectedDoctor!.doctorFee.toString()}',
+                      'Rs. ${selectedDoctor!.doctorFee.toString()}',
                       style: TextStyle(fontSize: 16),
                     ),
                     SizedBox(height: 10),
@@ -108,7 +108,7 @@ class _Page1State extends State<Page1> {
                       ),
                     ),
                     Text(
-                      '${selectedDoctor!.appointmentFee.toString()}',
+                      'RS. ${selectedDoctor!.appointmentFee.toString()}',
                       style: TextStyle(fontSize: 16),
                     ),
                     SizedBox(height: 10),
@@ -170,16 +170,16 @@ class Doctor {
 final List<Doctor> doctors = [
   Doctor(
     id: 'doctor1',
-    name: 'Doctor 1',
-    specialization: 'Specialization 1',
+    name: 'Dr. Nihal Peeris',
+    specialization: 'Family Medicine',
     doctorFee: 1000,
     appointmentFee: 250,
     availableTimeSlots: ['9:00 AM', '10:00 AM', '11:00 AM'],
   ),
   Doctor(
     id: 'doctor2',
-    name: 'Doctor 2',
-    specialization: 'Specialization 2',
+    name: 'Dr. Shamith Dilshan',
+    specialization: 'Emergency Medicine',
     doctorFee: 1200,
     appointmentFee: 300,
     availableTimeSlots: ['2:00 PM', '3:00 PM', '4:00 PM'],
