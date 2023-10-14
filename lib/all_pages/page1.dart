@@ -96,7 +96,7 @@ class _Page1State extends State<Page1> {
                       ),
                     ),
                     Text(
-                      '\$${selectedDoctor!.doctorFee.toString()}',
+                      '${selectedDoctor!.doctorFee.toString()}',
                       style: TextStyle(fontSize: 16),
                     ),
                     SizedBox(height: 10),
@@ -108,7 +108,7 @@ class _Page1State extends State<Page1> {
                       ),
                     ),
                     Text(
-                      '\$${selectedDoctor!.appointmentFee.toString()}',
+                      '${selectedDoctor!.appointmentFee.toString()}',
                       style: TextStyle(fontSize: 16),
                     ),
                     SizedBox(height: 10),
