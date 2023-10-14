@@ -20,22 +20,23 @@ class _page5State extends State<page5> {
       ],
     ),
     Photographer(
-      name: 'Global PET Photography',
-      description: 'Creating memories with pets from around the world.',
-      profileLink: 'https://web.facebook.com/profile.php?id=100069821091916',
+      name: 'Pet Studio',
+      description: 'Contact: 0771770290',
+      profileLink:
+          'https://web.facebook.com/people/Pet-Studio-Sri-Lanka/100064220884054/?mibextid=LQQJ4d',
       messengerLink:
-          'messenger://user?user_id=67890', // Replace with the Messenger link
+          'https://api.whatsapp.com/send?phone=%2B94704449500&data=ARCyU5UAEurlr1I87EbAGK79s0x43vrrRnUMGM_mJM5GY8i7qFyyk4cieknzBV-rFUvsr2jwoLLti_kgiAfHvA-JTdLFK1_vD6Noil3Ab-LUqMAfaqLRPWOiZY7FGGACgaTdfofPXGhbx3ebz6ZPhJc0og&source=FB_Page&app=facebook&entry_point=page_cta', // Replace with the Messenger link
       images: [
-        'assets/photograpy/photograpy4.jpg',
+        'assets/photograpy/pet_studio.jpeg',
       ],
     ),
     Photographer(
-      name: 'Another Photographer',
-      description: 'Photography description here.',
+      name: 'Mobile Studio',
+      description: 'Contact: 0771775698',
       profileLink:
-          'https://web.facebook.com/anotherprofile', // Replace with the Facebook profile link
+          'https://www.facebook.com/MSPHOTOGRAPHYAND?mibextid=ZbWKwL', // Replace with the Facebook profile link
       messengerLink:
-          'messenger://user?user_id=54321', // Replace with the Messenger link
+          'https://api.whatsapp.com/send?phone=%2B94704449500&data=ARCyU5UAEurlr1I87EbAGK79s0x43vrrRnUMGM_mJM5GY8i7qFyyk4cieknzBV-rFUvsr2jwoLLti_kgiAfHvA-JTdLFK1_vD6Noil3Ab-LUqMAfaqLRPWOiZY7FGGACgaTdfofPXGhbx3ebz6ZPhJc0og&source=FB_Page&app=facebook&entry_point=page_cta', // Replace with the Messenger link
       images: [
         'assets/photograpy/photograpy2.jpg',
       ],
