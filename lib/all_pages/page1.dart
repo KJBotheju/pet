@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import '../widgets/constant.dart';
 
@@ -17,7 +15,7 @@ class _Page1State extends State<Page1> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        foregroundColor: Colors.black, // Change the background color
+        foregroundColor: Colors.black,
         title: Text('Select Doctor'),
       ),
       body: Padding(
@@ -124,6 +122,29 @@ class _Page1State extends State<Page1> {
                         slot,
                         style: TextStyle(fontSize: 16),
                       ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Show a pop-up message when the button is clicked
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text('Appointment Confirmed'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('OK'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      child: Text('Book Appointment'),
+                    ),
                   ],
                 ),
               ),
