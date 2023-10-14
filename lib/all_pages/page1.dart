@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import '../widgets/constant.dart';
 
@@ -15,11 +17,11 @@ class _Page1State extends State<Page1> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        foregroundColor: Colors.black,
+        foregroundColor: Colors.black, // Change the background color
         title: Text('Select Doctor'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -34,29 +36,96 @@ class _Page1State extends State<Page1> {
               },
               items: [
                 DropdownMenuItem(
-                  value: 'doctor1', // Unique value for Doctor 1
+                  value: 'doctor1',
                   child: Text('Doctor 1'),
                 ),
                 DropdownMenuItem(
-                  value: 'doctor2', // Unique value for Doctor 2
+                  value: 'doctor2',
                   child: Text('Doctor 2'),
                 ),
                 // Add more doctors as needed
               ],
             ),
             if (selectedDoctor != null)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Doctor Name: ${selectedDoctor!.name}'),
-                  Text('Specialization: ${selectedDoctor!.specialization}'),
-                  Text('Doctor Fee: ${selectedDoctor!.doctorFee.toString()}'),
-                  Text(
-                      'Appointment Fee: ${selectedDoctor!.appointmentFee.toString()}'),
-                  Text('Available Time Slots:'),
-                  for (var slot in selectedDoctor!.availableTimeSlots)
-                    Text(slot),
-                ],
+              Container(
+                margin: EdgeInsets.only(top: 20.0),
+                padding: EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 3,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Doctor Name:',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      selectedDoctor!.name,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Specialization:',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      selectedDoctor!.specialization,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Doctor Fee:',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '\$${selectedDoctor!.doctorFee.toString()}',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Appointment Fee:',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '\$${selectedDoctor!.appointmentFee.toString()}',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Available Time Slots:',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    for (var slot in selectedDoctor!.availableTimeSlots)
+                      Text(
+                        slot,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                  ],
+                ),
               ),
           ],
         ),
