@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:pet/widgets/constant.dart';
+import '../screens/neckbelt.dart';
 
 class Page3 extends StatefulWidget {
   @override
@@ -76,8 +77,32 @@ class _Page3State extends State<Page3> {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    "Steps\n\n(1). Enter the phone number you want to track.\n\n(2). Click the 'Pet Location' button.\n\n(3). Type '000' and send an SMS (ensure it's bound with the SIM card).\n\n(4). After successful binding, you will receive a message.\n\n(5). Type '777' and send a message; you will receive a link shotly.\n\n(6). Open the link to view your pet's exact location.",
+                    "Steps\n\n(1). Enter the phone number you want to track.\n\n(2). Click the 'Pet Location' button.\n\n(3). Type '000' and send an SMS (ensure it's bound with the SIM card).\n\n(4). After successful binding, you will receive a message.\n\n(5). Type '777' and send a message; you will receive a link shortly.\n\n(6). Open the link to view your pet's exact location.",
                     style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                // New button
+                onPressed: () {
+                  // Navigate to the 'neckbelt.dart' file
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            NeckBeltPage()), // Assuming NeckbeltScreen is the widget for 'neckbelt.dart'
+                  );
+                },
+                child: Text(
+                  "How To buy Neckbelt",
+                  style: TextStyle(fontSize: 20),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
               ),
