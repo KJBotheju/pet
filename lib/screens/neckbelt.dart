@@ -75,7 +75,7 @@ class _NeckBeltPageState extends State<NeckBeltPage> {
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'Price: Rs. 2999',
+                'Price: Rs. 2500',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
