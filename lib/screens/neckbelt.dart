@@ -103,16 +103,30 @@ class _NeckBeltPageState extends State<NeckBeltPage> {
             delegate: SliverChildListDelegate(
               [
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Image.asset(
-                    'assets/images/dog0.jpg',
+                    'assets/images/traking1.jpeg',
                     width: 200,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Image.asset(
-                    'assets/images/dog1.jpg',
+                    'assets/images/traking2.jpeg',
+                    width: 200,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    'assets/images/traking3.jpeg',
+                    width: 200,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    'assets/images/traking4.jpeg',
                     width: 200,
                   ),
                 ),
