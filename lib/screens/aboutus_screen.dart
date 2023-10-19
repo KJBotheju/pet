@@ -55,7 +55,7 @@ class AboutUs extends StatelessWidget {
               CircleAvatar(
                 radius: 80.0,
                 backgroundImage: AssetImage(
-                    'assets/images/dog0.jpg'), // Add your logo image path here
+                    'assets/images/home_page_image.jpeg'), // Add your logo image path here
               ),
               SizedBox(height: 20.0),
               Text(
