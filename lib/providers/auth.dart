@@ -7,28 +7,30 @@ import '../models/http_exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Auth with ChangeNotifier {
-  late String _token;
-  DateTime _expiryDate = DateTime.now();
-  String _userId = '';
-  Timer? _authTimer;
+  late String _token; // Stores the authentication token
+  DateTime _expiryDate = DateTime.now(); // Stores the token's expiration date
+  String _userId = ''; // Stores the user's unique identifier
+  Timer? _authTimer; // Timer for handling automatic logout
 
+  // Getter for checking if the user is authenticated
   bool get isAuth {
     return (token != '');
   }
 
+  // Getter for the authentication token
   String get token {
-    if (_expiryDate != '' &&
-        _expiryDate.isAfter(DateTime.now()) &&
-        _token != '') {
+    if (_expiryDate.isAfter(DateTime.now()) && _token != '') {
       return _token;
     }
     return '';
   }
 
+  // Getter for the user's unique identifier
   String get userId {
     return _userId;
   }
 
+  // Private method for authenticating a user with email and password
   Future<void> _authenticate(
       String email, String password, String urlSegment) async {
     final url = Uri.parse(
@@ -50,9 +52,7 @@ class Auth with ChangeNotifier {
       _userId = responseData['localId'];
       _expiryDate = DateTime.now().add(
         Duration(
-          seconds: int.parse(
-            responseData['expiresIn'],
-          ),
+          seconds: int.parse(responseData['expiresIn']),
         ),
       );
       _autoLogout();
@@ -71,16 +71,17 @@ class Auth with ChangeNotifier {
     }
   }
 
+  // Public method for user signup
   Future<void> signup(String email, String password) async {
-    // const url =
-    // 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyA2kcfpCK4awuduONEVELporWX2B_7JMpI';
     return _authenticate(email, password, 'signUp');
   }
 
+  // Public method for user login
   Future<void> login(String email, String password) async {
     return _authenticate(email, password, 'signInWithPassword');
   }
 
+  // Public method to attempt auto-login
   Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userData')) {
@@ -101,6 +102,7 @@ class Auth with ChangeNotifier {
     return true;
   }
 
+  // Public method for user logout
   Future<void> logout() async {
     _token = '';
     _userId = '';
@@ -114,6 +116,7 @@ class Auth with ChangeNotifier {
     prefs.clear();
   }
 
+  // Private method to handle auto-logout based on the token's expiration
   void _autoLogout() {
     if (_authTimer != null) {
       _authTimer!.cancel();

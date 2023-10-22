@@ -1,4 +1,7 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, prefer_final_fields, unused_catch_clause, empty_catches
+// Ignore certain linting rules.
+// These rules can be safely ignored for this specific file.
+
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'dart:math';
 import 'package:provider/provider.dart';
@@ -6,21 +9,21 @@ import 'package:flutter/material.dart';
 import '../providers/auth.dart';
 import '../models/http_exception.dart';
 
+// Enumeration to represent different authentication modes
 enum AuthMode { Signup, Login }
 
 class AuthScreen extends StatelessWidget {
-  static const routeName = '/auth';
+  static const routeName = '/auth'; // The route name for this screen
 
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery.of(context).size;
+    final deviceSize =
+        MediaQuery.of(context).size; // Get the device screen size
 
-    // final transformConfig = Matrix4.rotationZ(-8 * pi / 180);
-    // transformConfig.translate(-10.0);
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       body: Stack(
         children: <Widget>[
+          // Background container with a gradient
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -34,6 +37,7 @@ class AuthScreen extends StatelessWidget {
               ),
             ),
           ),
+          // Scrollable content
           SingleChildScrollView(
             child: Container(
               height: deviceSize.height,
@@ -42,6 +46,7 @@ class AuthScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+                  // Title with a decorative box
                   Flexible(
                     child: Container(
                       margin: EdgeInsets.only(bottom: 20.0),
@@ -49,7 +54,6 @@ class AuthScreen extends StatelessWidget {
                           EdgeInsets.symmetric(vertical: 8.0, horizontal: 94.0),
                       transform: Matrix4.rotationZ(-8 * pi / 180)
                         ..translate(-10.0),
-                      // ..translate(-10.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.deepOrange.shade900,
@@ -58,7 +62,7 @@ class AuthScreen extends StatelessWidget {
                             blurRadius: 8,
                             color: Colors.black26,
                             offset: Offset(0, 2),
-                          )
+                          ),
                         ],
                       ),
                       child: Text(
@@ -75,6 +79,7 @@ class AuthScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  // Authentication card
                   Flexible(
                     flex: deviceSize.width > 600 ? 2 : 1,
                     child: AuthCard(),
@@ -90,44 +95,47 @@ class AuthScreen extends StatelessWidget {
 }
 
 class AuthCard extends StatefulWidget {
-  const AuthCard({
-    Key? key,
-  }) : super(key: key);
+  const AuthCard({Key? key}) : super(key: key);
 
   @override
   _AuthCardState createState() => _AuthCardState();
 }
 
 class _AuthCardState extends State<AuthCard> {
-  final GlobalKey<FormState> _formKey = GlobalKey();
-  AuthMode _authMode = AuthMode.Login;
+  final GlobalKey<FormState> _formKey =
+      GlobalKey(); // Key for the authentication form
+  AuthMode _authMode = AuthMode.Login; // Current authentication mode
   Map<String, String> _authData = {
     'email': '',
     'password': '',
-  };
-  var _isLoading = false;
-  final _passwordController = TextEditingController();
+  }; // Data entered by the user
+  var _isLoading = false; // Flag to indicate loading state
+  final _passwordController =
+      TextEditingController(); // Controller for password input
 
+  // Display an error dialog with a given error message
   void _showErrorDialog(String message) {
     showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-              title: Text('An error occurred!'),
-              content: Text(message),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('Okey'),
-                  onPressed: () {
-                    Navigator.of(ctx).pop();
-                  },
-                )
-              ],
-            ));
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('An error occurred!'),
+        content: Text(message),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Okey'),
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+          ),
+        ],
+      ),
+    );
   }
 
+  // Submit the authentication form
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) {
-      // Invalid!
+      // Form validation failed
       return;
     }
     _formKey.currentState!.save();
@@ -149,6 +157,7 @@ class _AuthCardState extends State<AuthCard> {
         );
       }
     } on HttpException catch (error) {
+      // Handle specific HTTP exceptions
       var errorMessage = 'Authentication failed';
       if (error.toString().contains('EMAIL_EXISTS')) {
         errorMessage = 'This email address is already in use.';
@@ -157,12 +166,13 @@ class _AuthCardState extends State<AuthCard> {
       } else if (error.toString().contains('WEAK_PASSWORD')) {
         errorMessage = 'This password is too weak.';
       } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
-        errorMessage = 'Could not find user with that email.';
+        errorMessage = 'Could not find a user with that email.';
       } else if (error.toString().contains('INVALID_PASSWORD')) {
         errorMessage = 'Invalid password';
       }
       _showErrorDialog(errorMessage);
     } catch (error) {
+      // Handle generic errors
       const errorMessage =
           'Could not authenticate you. Please try again later.';
       _showErrorDialog(errorMessage);
@@ -173,6 +183,7 @@ class _AuthCardState extends State<AuthCard> {
     });
   }
 
+  // Switch between login and signup modes
   void _switchAuthMode() {
     if (_authMode == AuthMode.Login) {
       setState(() {
@@ -249,18 +260,6 @@ class _AuthCardState extends State<AuthCard> {
                 if (_isLoading)
                   CircularProgressIndicator()
                 else
-                  // RaisedButton(
-                  //   child:
-                  //       Text(_authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP'),
-                  //   onPressed: _submit,
-                  //   shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(30),
-                  //   ),
-                  //   padding:
-                  //       EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
-                  //   color: Theme.of(context).primaryColor,
-                  //   textColor: Theme.of(context).primaryTextTheme.button!.color,
-                  // ),
                   TextButton(
                     child:
                         Text(_authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP'),
@@ -279,7 +278,6 @@ class _AuthCardState extends State<AuthCard> {
                   child: Text(
                       '${_authMode == AuthMode.Login ? 'SIGNUP' : 'LOGIN'} INSTEAD'),
                   onPressed: _switchAuthMode,
-                  // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.symmetric(
                       horizontal: 30,
