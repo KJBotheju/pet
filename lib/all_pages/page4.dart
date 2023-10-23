@@ -10,10 +10,12 @@ class page4 extends StatefulWidget {
 }
 
 class _page4State extends State<page4> {
+  // Create a list of items (you may add more items)
   List<String> items = [
     '',
   ];
 
+  // Create a list of shop links corresponding to the items
   List<String> shop_link = [
     'https://www.onlinekade.lk/product-category/pet-care/pet-food/',
   ];
@@ -28,8 +30,10 @@ class _page4State extends State<page4> {
       ),
       body: Container(
         color: Colors.grey[200], // Set the background color
-        padding: EdgeInsets.symmetric(
-            vertical: 10, horizontal: 2), // Set the padding
+
+        // Set padding for the container
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+
         child: SingleChildScrollView(
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -38,25 +42,29 @@ class _page4State extends State<page4> {
                 childAspectRatio:
                     1.4 // Set the vertical spacing between grid items
                 ),
-            shrinkWrap:
-                true, // Allow the GridView to be scrollable within the SingleChildScrollView
-            physics:
-                NeverScrollableScrollPhysics(), // Disable GridView's own scrolling
+
+            // Make the GridView scrollable within the SingleChildScrollView
+            shrinkWrap: true,
+
+            // Disable GridView's own scrolling
+            physics: NeverScrollableScrollPhysics(),
+
+            // Define the number of items in the grid
             itemCount: items.length,
+
+            // Build each grid item
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 decoration: BoxDecoration(
+                  // Set the background image for the grid item
                   image: DecorationImage(
                       image: AssetImage('assets/images/sh.jpeg'),
                       fit: BoxFit.cover),
                 ),
-                // color: Color.fromARGB(255, 119, 187,
-                //     243), // Set the background color for grid item
                 child: InkWell(
                   onTap: () {
+                    // Open the link when the item is tapped
                     launch(shop_link[index]);
-                    // onTap code here
-                    //print(items[index]);
                   },
                   child: Align(
                     alignment: Alignment.topCenter,
@@ -69,8 +77,8 @@ class _page4State extends State<page4> {
                           fontWeight: FontWeight.bold,
                           backgroundColor: Colors.white.withOpacity(0.5),
 
-                          // Set the text color for grid item
-                          fontSize: 30.0, // Set the font size for grid item
+                          // Set the text color and font size for the grid item
+                          fontSize: 30.0,
                         ),
                       ),
                     ),
