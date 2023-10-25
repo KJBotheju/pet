@@ -1,18 +1,16 @@
-// This line suppresses a linting warning regarding the use of const constructors.
-// This is often a matter of coding style and does not affect the functionality.
-import 'package:flutter/material.dart'; // Import for Flutter's material design widgets
-import 'package:pet/screens/home_screen.dart'; // Import for the HomeScreen widget
-import 'package:provider/provider.dart'; // Import for the Provider package
-import 'screens/auth_screen.dart'; // Import for the AuthScreen widget
-import './providers/auth.dart'; // Import for the custom Auth provider class
-import 'screens/splash_screen.dart'; // Import for the SplashScreen widget
+import 'package:flutter/material.dart';
+import 'package:pet/screens/home_screen.dart';
+import 'package:provider/provider.dart';
+import 'screens/auth_screen.dart';
+import './providers/auth.dart';
+import 'screens/splash_screen.dart';
 
 void main() {
   runApp(MyApp()); // Entry point
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  // This widget is the root of application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
