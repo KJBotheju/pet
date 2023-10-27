@@ -18,6 +18,46 @@ class _page7State extends State<page7> {
 
   bool _showChart = false;
 
+  // Function to fetch data from Firebase
+  Future<void> _fetchData() async {
+    final response = await http.get(
+      Uri.parse(
+          'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/time/user.json'), // Append ".json" here
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      final List<Transaction> fetchedTransactions = [];
+
+      data.forEach((key, value) {
+        final Transaction transaction = Transaction(
+          id: key,
+          title: value['title'],
+          amount: value['amount'],
+          date: DateTime.parse(value['date']),
+        );
+        fetchedTransactions.add(transaction);
+      });
+
+      setState(() {
+        _userTransaction.clear();
+        _userTransaction.addAll(fetchedTransactions);
+      });
+    } else {
+      // Handle the error, e.g., display an error message and debug information
+      print('Failed to fetch data from Firebase');
+      print('Response Status Code: ${response.statusCode}');
+      print('Response Body: ${response.body}');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Call the fetch data method when the page is loaded
+    _fetchData();
+  }
+
   List<Transaction> get _recentTransactions {
     return _userTransaction.where((tx) {
       return tx.date.isAfter(
