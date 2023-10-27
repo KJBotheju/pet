@@ -4,21 +4,11 @@ import 'package:provider/provider.dart';
 import 'screens/auth_screen.dart';
 import './providers/auth.dart';
 import 'screens/splash_screen.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() {
   runApp(MyApp()); // Entry point
 }
-
-/*void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final status = await Permission.sms.request();
-  if (status.isGranted) {
-    runApp(MyApp());
-  } else {
-    // Handle the case when permission is not granted
-  }
-}*/
 
 class MyApp extends StatelessWidget {
   // This widget is the root of application.

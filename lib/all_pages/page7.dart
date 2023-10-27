@@ -7,6 +7,7 @@ import './transaction_list.dart';
 import './new_transaction.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:pet/screens/splash_screen.dart';
 
 class page7 extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class page7 extends StatefulWidget {
 
 class _page7State extends State<page7> {
   final List<Transaction> _userTransaction = [];
-
+  bool _dataLoaded = false;
   bool _showChart = false;
 
   // Function to fetch data from Firebase
@@ -40,6 +41,7 @@ class _page7State extends State<page7> {
       });
 
       setState(() {
+        _dataLoaded = true;
         _userTransaction.clear();
         _userTransaction.addAll(fetchedTransactions);
       });
@@ -116,16 +118,30 @@ class _page7State extends State<page7> {
     );
   }
 
-  void _deleteTransaction(String id) {
-    setState(() {
-      _userTransaction.removeWhere((tx) {
-        return tx.id == id;
+  Future<void> _deleteTransaction(String id) async {
+    final response = await http.delete(
+      Uri.parse(
+          'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/time/user/$id.json'),
+    );
+
+    if (response.statusCode == 200) {
+      // Successfully deleted from Firebase
+      setState(() {
+        _userTransaction.removeWhere((tx) => tx.id == id);
       });
-    });
+    } else {
+      // Handle the error, e.g., display an error message and debug information
+      print('Failed to delete transaction from Firebase');
+      print('Response Status Code: ${response.statusCode}');
+      print('Response Body: ${response.body}');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (!_dataLoaded) {
+      return SplashScreen(); // Show the loading screen
+    }
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
     final appBar = AppBar(
