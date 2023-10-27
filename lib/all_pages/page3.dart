@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:pet/widgets/constant.dart';
 import '../screens/neckbelt.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Page3 extends StatefulWidget {
   @override
@@ -116,12 +117,20 @@ class _Page3State extends State<Page3> {
   void _openMessagingApp() async {
     final recipient = recipientController.text;
 
-    final url = "sms:$recipient";
+    // Request SMS permission
+    var status = await Permission.sms.request();
 
-    if (await canLaunch(url)) {
-      await launch(url);
+    if (status.isGranted) {
+      final url = "sms:$recipient";
+
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
     } else {
-      throw 'Could not launch $url';
+      // Handle the case when permission is not granted
+      // You can show a message to the user here
     }
   }
 
