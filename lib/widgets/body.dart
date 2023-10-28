@@ -104,7 +104,7 @@ class _BodyState extends State<Body> {
                               'assets/images/home$index.jpg',
                               // Replace with your image asset path
                               fit: BoxFit.cover,
-                              height: carouselHeight,
+                              height: carouselHeight * 1.1,
                             ),
                           ),
                           SizedBox(height: 10),
@@ -113,6 +113,7 @@ class _BodyState extends State<Body> {
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
+                              height: carouselHeight * 0.01,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
