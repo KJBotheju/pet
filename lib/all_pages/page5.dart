@@ -14,7 +14,7 @@ class _page5State extends State<page5> {
       description: 'Contact: 0704449500',
       profileLink: 'https://www.facebook.com/NuPetStudio/',
       messengerLink:
-          'https://api.whatsapp.com/send?phone=%2B94704449500&data=ARCyU5UAEurlr1I87EbAGK79s0x43vrrRnUMGM_mJM5GY8i7qFyyk4cieknzBV-rFUvsr2jwoLLti_kgiAfHvA-JTdLFK1_vD6Noil3Ab-LUqMAfaqLRPWOiZY7FGGACgaTdfofPXGhbx3ebz6ZPhJc0og&source=FB_Page&app=facebook&entry_point=page_cta', // Replace with the Messenger link
+          'https://api.whatsapp.com/send?phone=+94704449500', // Replace with the Messenger link
       images: [
         'assets/photograpy/nupetstudio.jpg',
       ],
@@ -25,7 +25,8 @@ class _page5State extends State<page5> {
       profileLink:
           'https://web.facebook.com/people/Pet-Studio-Sri-Lanka/100064220884054/?mibextid=LQQJ4d',
       messengerLink:
-          'https://api.whatsapp.com/send?phone=%2B94704449500&data=ARCyU5UAEurlr1I87EbAGK79s0x43vrrRnUMGM_mJM5GY8i7qFyyk4cieknzBV-rFUvsr2jwoLLti_kgiAfHvA-JTdLFK1_vD6Noil3Ab-LUqMAfaqLRPWOiZY7FGGACgaTdfofPXGhbx3ebz6ZPhJc0og&source=FB_Page&app=facebook&entry_point=page_cta', // Replace with the Messenger link
+          'https://api.whatsapp.com/send?phone=+94771770290', // Replace with the Messenger link
+      // Replace with the Messenger link
       images: [
         'assets/photograpy/pet_studio.jpeg',
       ],
@@ -35,8 +36,8 @@ class _page5State extends State<page5> {
       description: 'Contact: 0771775698',
       profileLink:
           'https://www.facebook.com/MSPHOTOGRAPHYAND?mibextid=ZbWKwL', // Replace with the Facebook profile link
-      messengerLink:
-          'https://api.whatsapp.com/send?phone=%2B94704449500&data=ARCyU5UAEurlr1I87EbAGK79s0x43vrrRnUMGM_mJM5GY8i7qFyyk4cieknzBV-rFUvsr2jwoLLti_kgiAfHvA-JTdLFK1_vD6Noil3Ab-LUqMAfaqLRPWOiZY7FGGACgaTdfofPXGhbx3ebz6ZPhJc0og&source=FB_Page&app=facebook&entry_point=page_cta', // Replace with the Messenger link
+      messengerLink: 'https://api.whatsapp.com/send?phone=+94771775698',
+// Replace with the Messenger link
       images: [
         'assets/photograpy/photograpy2.jpg',
       ],
