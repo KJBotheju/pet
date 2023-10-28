@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import '../widgets/constant.dart';
+import './splash_screen.dart';
 
 class Pet {
   String id; // Unique identifier for each pet
@@ -27,6 +28,7 @@ class PetProfilePage extends StatefulWidget {
 }
 
 class _PetProfilePageState extends State<PetProfilePage> {
+  bool _dataLoaded = false;
   List<Pet> pets = [];
 
   TextEditingController nameController = TextEditingController();
@@ -70,6 +72,7 @@ class _PetProfilePageState extends State<PetProfilePage> {
           });
 
           setState(() {
+            _dataLoaded = true;
             pets = retrievedPets;
           });
         }
@@ -85,6 +88,9 @@ class _PetProfilePageState extends State<PetProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (!_dataLoaded) {
+      return SplashScreen(); // Show the loading screen
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Pet Profile'),
