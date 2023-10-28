@@ -19,11 +19,17 @@ class _page7State extends State<page7> {
   bool _dataLoaded = false;
   bool _showChart = false;
 
-  // Function to fetch data from Firebase
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
   Future<void> _fetchData() async {
     final response = await http.get(
       Uri.parse(
-          'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/time/user.json'), // Append ".json" here
+        'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/time/user.json',
+      ),
     );
 
     if (response.statusCode == 200) {
@@ -46,18 +52,10 @@ class _page7State extends State<page7> {
         _userTransaction.addAll(fetchedTransactions);
       });
     } else {
-      // Handle the error, e.g., display an error message and debug information
       print('Failed to fetch data from Firebase');
       print('Response Status Code: ${response.statusCode}');
       print('Response Body: ${response.body}');
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // Call the fetch data method when the page is loaded
-    _fetchData();
   }
 
   List<Transaction> get _recentTransactions {
@@ -71,7 +69,10 @@ class _page7State extends State<page7> {
   }
 
   Future<void> _addNewTransaction(
-      String txTitle, double txAmount, DateTime chosenDate) async {
+    String txTitle,
+    double txAmount,
+    DateTime chosenDate,
+  ) async {
     final newTx = Transaction(
       title: txTitle,
       amount: txAmount,
@@ -79,7 +80,6 @@ class _page7State extends State<page7> {
       id: DateTime.now().toString(),
     );
 
-    // Convert the transaction data to a JSON format
     final jsonData = {
       'title': newTx.title,
       'amount': newTx.amount,
@@ -88,17 +88,16 @@ class _page7State extends State<page7> {
 
     final response = await http.post(
       Uri.parse(
-          'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/time/user.json'), // Append ".json" here
+        'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/time/user.json',
+      ),
       body: json.encode(jsonData),
     );
 
     if (response.statusCode == 200) {
-      // Successfully added to Firebase
       setState(() {
         _userTransaction.add(newTx);
       });
     } else {
-      // Handle the error, e.g., display an error message and debug information
       print('Failed to add transaction to Firebase');
       print('Response Status Code: ${response.statusCode}');
       print('Response Body: ${response.body}');
@@ -121,16 +120,15 @@ class _page7State extends State<page7> {
   Future<void> _deleteTransaction(String id) async {
     final response = await http.delete(
       Uri.parse(
-          'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/time/user/$id.json'),
+        'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/time/user/$id.json',
+      ),
     );
 
     if (response.statusCode == 200) {
-      // Successfully deleted from Firebase
       setState(() {
         _userTransaction.removeWhere((tx) => tx.id == id);
       });
     } else {
-      // Handle the error, e.g., display an error message and debug information
       print('Failed to delete transaction from Firebase');
       print('Response Status Code: ${response.statusCode}');
       print('Response Body: ${response.body}');
