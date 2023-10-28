@@ -246,6 +246,10 @@ class _PetProfilePageState extends State<PetProfilePage> {
                   pet.image = _image != null ? _image!.path : pet.image;
                   pet.breed = breedEditController.text;
                 });
+
+                // Send a PUT request to Firebase to update the pet data
+                _updatePetInFirebase(pet);
+
                 Navigator.pop(context);
               },
             ),
@@ -272,9 +276,15 @@ class _PetProfilePageState extends State<PetProfilePage> {
             TextButton(
               child: Text('Delete'),
               onPressed: () {
+                final pet = pets[index];
+
+                // Send a DELETE request to Firebase to remove the pet data
+                _deletePetFromFirebase(pet);
+
                 setState(() {
                   pets.removeAt(index);
                 });
+
                 Navigator.pop(context);
               },
             ),
@@ -322,9 +332,9 @@ class _PetProfilePageState extends State<PetProfilePage> {
         'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/';
 
     try {
-      final response = await http.post(
+      final response = await http.put(
         Uri.parse(
-            '$firebaseDatabaseURL/pets.json'), // Replace 'pets' with your Firebase database path
+            '$firebaseDatabaseURL/pets/${newPet.hashCode}.json'), // You can set your custom key here
         body: json.encode({
           'name': newPet.name,
           'image': newPet.image,
@@ -342,6 +352,54 @@ class _PetProfilePageState extends State<PetProfilePage> {
       }
     } catch (error) {
       print('Error adding pet details to Firebase: $error');
+    }
+  }
+
+  Future<void> _updatePetInFirebase(Pet pet) async {
+    final firebaseDatabaseURL =
+        'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/';
+
+    try {
+      final response = await http.patch(
+        Uri.parse('$firebaseDatabaseURL/pets/${pet.hashCode}.json'),
+        body: json.encode({
+          'name': pet.name,
+          'image': pet.image,
+          'age': pet.age,
+          'breed': pet.breed,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        print('Pet details updated in Firebase successfully.');
+      } else {
+        print('Failed to update pet details in Firebase');
+        print('Response Status Code: ${response.statusCode}');
+        print('Response Body: ${response.body}');
+      }
+    } catch (error) {
+      print('Error updating pet details in Firebase: $error');
+    }
+  }
+
+  Future<void> _deletePetFromFirebase(Pet pet) async {
+    final firebaseDatabaseURL =
+        'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/';
+
+    try {
+      final response = await http.delete(
+        Uri.parse('$firebaseDatabaseURL/pets/${pet.hashCode}.json'),
+      );
+
+      if (response.statusCode == 200) {
+        print('Pet details deleted from Firebase successfully.');
+      } else {
+        print('Failed to delete pet details from Firebase');
+        print('Response Status Code: ${response.statusCode}');
+        print('Response Body: ${response.body}');
+      }
+    } catch (error) {
+      print('Error deleting pet details from Firebase: $error');
     }
   }
 }
