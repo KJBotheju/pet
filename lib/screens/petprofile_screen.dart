@@ -6,12 +6,14 @@ import 'package:image_picker/image_picker.dart';
 import '../widgets/constant.dart';
 
 class Pet {
+  String id; // Unique identifier for each pet
   String name;
   String image;
   int age;
   String breed;
 
   Pet({
+    required this.id,
     required this.name,
     required this.image,
     required this.age,
@@ -58,6 +60,7 @@ class _PetProfilePageState extends State<PetProfilePage> {
             final Map<String, dynamic> petData = value;
             if (petData != null) {
               retrievedPets.add(Pet(
+                id: key, // Use the key as the unique identifier
                 name: petData['name'],
                 image: petData['image'],
                 age: petData['age'],
@@ -213,6 +216,7 @@ class _PetProfilePageState extends State<PetProfilePage> {
               child: Text('Save'),
               onPressed: () {
                 final newPet = Pet(
+                  id: DateTime.now().millisecondsSinceEpoch.toString(),
                   name: nameController.text,
                   image: _image != null ? _image!.path : '',
                   age: int.parse(ageController.text),
@@ -381,7 +385,7 @@ class _PetProfilePageState extends State<PetProfilePage> {
     try {
       final response = await http.put(
         Uri.parse(
-            '$firebaseDatabaseURL/pets/${newPet.hashCode}.json'), // You can set your custom key here
+            '$firebaseDatabaseURL/pets/${newPet.id}.json'), // Use the unique ID as the key
         body: json.encode({
           'name': newPet.name,
           'image': newPet.image,
@@ -407,8 +411,9 @@ class _PetProfilePageState extends State<PetProfilePage> {
         'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/';
 
     try {
-      final response = await http.patch(
-        Uri.parse('$firebaseDatabaseURL/pets/${pet.hashCode}.json'),
+      final response = await http.put(
+        Uri.parse(
+            '$firebaseDatabaseURL/pets/${pet.id}.json'), // Use the unique ID as the key
         body: json.encode({
           'name': pet.name,
           'image': pet.image,
@@ -435,7 +440,8 @@ class _PetProfilePageState extends State<PetProfilePage> {
 
     try {
       final response = await http.delete(
-        Uri.parse('$firebaseDatabaseURL/pets/${pet.hashCode}.json'),
+        Uri.parse(
+            '$firebaseDatabaseURL/pets/${pet.id}.json'), // Use the unique ID as the key
       );
 
       if (response.statusCode == 200) {
