@@ -1,7 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import '../widgets/constant.dart';
 
 class page8 extends StatefulWidget {
@@ -12,6 +12,39 @@ class page8 extends StatefulWidget {
 class _page8State extends State<page8> {
   DateTime _selectedDay = DateTime.now();
   Map<DateTime, List<String>> _events = {};
+  final firebaseDatabaseURL =
+      'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/';
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchVaccineData();
+  }
+
+  Future<void> _fetchVaccineData() async {
+    final formattedDate = _selectedDay.toIso8601String().substring(0, 10);
+    final response = await http
+        .get(Uri.parse('$firebaseDatabaseURL/vaccine/$formattedDate.json'));
+
+    if (response.statusCode == 200) {
+      final dynamic responseData = json.decode(response.body);
+      if (responseData is Map<String, dynamic>) {
+        final List<String> vaccineNames =
+            responseData.values.cast<String>().toList();
+        setState(() {
+          _events[_selectedDay] = vaccineNames;
+        });
+      } else {
+        print('Response data is not in the expected format (not a Map).');
+      }
+    } else if (response.statusCode == 404) {
+      print('No vaccine data found for this date.');
+    } else {
+      print('Failed to fetch vaccine data from Firebase');
+      print('Response Status Code: ${response.statusCode}');
+      print('Response Body: ${response.body}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +66,9 @@ class _page8State extends State<page8> {
                 setState(() {
                   _selectedDay = selectedDay;
                 });
+                _fetchVaccineData();
               },
               eventLoader: (day) {
-                // This function is used to load events for a given day.
-                // You can return events for the specified day from _events.
                 return _events[day] ?? [];
               },
             ),
@@ -106,13 +138,31 @@ class _page8State extends State<page8> {
     );
   }
 
-  void _addVaccineDate(String vaccineName) {
-    setState(() {
-      if (_events[_selectedDay] == null) {
-        _events[_selectedDay] = [vaccineName];
-      } else {
-        _events[_selectedDay]!.add(vaccineName);
-      }
-    });
+  void _addVaccineDate(String vaccineName) async {
+    final formattedDate = _selectedDay.toIso8601String().substring(0, 10);
+    final sanitizedVaccineName = vaccineName.replaceAll(RegExp(r'[^\w]'), '');
+
+    final jsonData = {
+      'vaccineName': sanitizedVaccineName,
+    };
+
+    final response = await http.post(
+      Uri.parse('$firebaseDatabaseURL/vaccine/$formattedDate.json'),
+      body: json.encode(jsonData),
+    );
+
+    if (response.statusCode == 200) {
+      setState(() {
+        if (_events[_selectedDay] == null) {
+          _events[_selectedDay] = [sanitizedVaccineName];
+        } else {
+          _events[_selectedDay]!.add(sanitizedVaccineName);
+        }
+      });
+    } else {
+      print('Failed to add vaccine date to Firebase');
+      print('Response Status Code: ${response.statusCode}');
+      print('Response Body: ${response.body}');
+    }
   }
 }
