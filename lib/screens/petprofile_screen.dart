@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors
-
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:pet/widgets/constant.dart';
+import '../widgets/constant.dart';
 
 class Pet {
   String name;
@@ -11,11 +11,12 @@ class Pet {
   int age;
   String breed;
 
-  Pet(
-      {required this.name,
-      required this.image,
-      required this.age,
-      required this.breed});
+  Pet({
+    required this.name,
+    required this.image,
+    required this.age,
+    required this.breed,
+  });
 }
 
 class PetProfilePage extends StatefulWidget {
@@ -36,9 +37,9 @@ class _PetProfilePageState extends State<PetProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text('Pet Profile'),
         backgroundColor: kPrimaryColor,
         foregroundColor: Colors.black,
-        title: Text('Pet Profile'),
       ),
       body: ListView.builder(
         itemCount: pets.length,
@@ -115,7 +116,7 @@ class _PetProfilePageState extends State<PetProfilePage> {
     );
   }
 
-  void _addPetDetails() {
+  void _addPetDetails() async {
     nameController.text = '';
     ageController.text = '';
     breedController.text = '';
@@ -164,16 +165,21 @@ class _PetProfilePageState extends State<PetProfilePage> {
             TextButton(
               child: Text('Save'),
               onPressed: () {
+                final newPet = Pet(
+                  name: nameController.text,
+                  image: _image != null ? _image!.path : '',
+                  age: int.parse(ageController.text),
+                  breed: breedController.text,
+                );
+
+                // Send a POST request to Firebase to add the new pet data
+                _addPetToFirebase(newPet);
+
+                // Add the new pet to the local list
                 setState(() {
-                  pets.add(
-                    Pet(
-                      name: nameController.text,
-                      image: _image != null ? _image!.path : '',
-                      age: int.parse(ageController.text),
-                      breed: breedController.text,
-                    ),
-                  );
+                  pets.add(newPet);
                 });
+
                 Navigator.pop(context);
               },
             ),
@@ -188,7 +194,8 @@ class _PetProfilePageState extends State<PetProfilePage> {
         TextEditingController(text: pet.name);
     TextEditingController ageEditController =
         TextEditingController(text: pet.age.toString());
-    TextEditingController(text: pet.breed);
+    TextEditingController breedEditController =
+        TextEditingController(text: pet.breed);
 
     showDialog(
       context: context,
@@ -214,7 +221,7 @@ class _PetProfilePageState extends State<PetProfilePage> {
                   ),
                 ),
                 TextField(
-                  controller: breedController,
+                  controller: breedEditController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: 'Breed',
@@ -237,7 +244,7 @@ class _PetProfilePageState extends State<PetProfilePage> {
                   pet.name = nameEditController.text;
                   pet.age = int.parse(ageEditController.text);
                   pet.image = _image != null ? _image!.path : pet.image;
-                  pet.breed = breedController.text;
+                  pet.breed = breedEditController.text;
                 });
                 Navigator.pop(context);
               },
@@ -308,5 +315,33 @@ class _PetProfilePageState extends State<PetProfilePage> {
         _image = File(pickedImage.path);
       }
     });
+  }
+
+  Future<void> _addPetToFirebase(Pet newPet) async {
+    final firebaseDatabaseURL =
+        'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/';
+
+    try {
+      final response = await http.post(
+        Uri.parse(
+            '$firebaseDatabaseURL/pets.json'), // Replace 'pets' with your Firebase database path
+        body: json.encode({
+          'name': newPet.name,
+          'image': newPet.image,
+          'age': newPet.age,
+          'breed': newPet.breed,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        print('Pet details added to Firebase successfully.');
+      } else {
+        print('Failed to add pet details to Firebase');
+        print('Response Status Code: ${response.statusCode}');
+        print('Response Body: ${response.body}');
+      }
+    } catch (error) {
+      print('Error adding pet details to Firebase: $error');
+    }
   }
 }
