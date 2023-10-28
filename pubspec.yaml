@@ -60,6 +60,7 @@ dependencies:
   firebase_core: ^2.15.1
   firebase_auth: ^4.10.1
   permission_handler: ^11.0.1
+  firebase_database: ^10.3.2
   
 
   
