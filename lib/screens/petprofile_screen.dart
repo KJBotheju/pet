@@ -34,6 +34,53 @@ class _PetProfilePageState extends State<PetProfilePage> {
   File? _image;
 
   @override
+  void initState() {
+    super.initState();
+    // Load data from Firebase when the page is initialized
+    _fetchPetsFromFirebase();
+  }
+
+  Future<void> _fetchPetsFromFirebase() async {
+    final firebaseDatabaseURL =
+        'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/';
+
+    try {
+      final response = await http.get(
+        Uri.parse('$firebaseDatabaseURL/pets.json'),
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+
+        if (data != null) {
+          final List<Pet> retrievedPets = [];
+          data.forEach((key, value) {
+            final Map<String, dynamic> petData = value;
+            if (petData != null) {
+              retrievedPets.add(Pet(
+                name: petData['name'],
+                image: petData['image'],
+                age: petData['age'],
+                breed: petData['breed'],
+              ));
+            }
+          });
+
+          setState(() {
+            pets = retrievedPets;
+          });
+        }
+      } else {
+        print('Failed to fetch pet details from Firebase');
+        print('Response Status Code: ${response.statusCode}');
+        print('Response Body: ${response.body}');
+      }
+    } catch (error) {
+      print('Error fetching pet details from Firebase: $error');
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
