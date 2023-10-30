@@ -1,49 +1,46 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import '../widgets/constant.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pet/widgets/constant.dart';
 
 class page8 extends StatefulWidget {
   @override
-  State<page8> createState() => _page8State();
+  _page8State createState() => _page8State();
 }
 
 class _page8State extends State<page8> {
   DateTime _selectedDay = DateTime.now();
-  Map<DateTime, List<String>> _events = {};
-  final firebaseDatabaseURL =
-      'https://petcare-e6024-default-rtdb.asia-southeast1.firebasedatabase.app/';
+  Map<String, List<String>> _events = {};
+  final _prefsKey = 'vaccineData';
 
   @override
   void initState() {
     super.initState();
-    _fetchVaccineData();
+    _loadVaccineData();
   }
 
-  Future<void> _fetchVaccineData() async {
-    final formattedDate = _selectedDay.toIso8601String().substring(0, 10);
-    final response = await http
-        .get(Uri.parse('$firebaseDatabaseURL/vaccine/$formattedDate.json'));
-
-    if (response.statusCode == 200) {
-      final dynamic responseData = json.decode(response.body);
-      if (responseData is Map<String, dynamic>) {
-        final List<String> vaccineNames =
-            responseData.values.cast<String>().toList();
-        setState(() {
-          _events[_selectedDay] = vaccineNames;
-        });
-      } else {
-        print('Response data is not in the expected format (not a Map).');
-      }
-    } else if (response.statusCode == 404) {
-      print('No vaccine data found for this date.');
-    } else {
-      print('Failed to fetch vaccine data from Firebase');
-      print('Response Status Code: ${response.statusCode}');
-      print('Response Body: ${response.body}');
+  Future<void> _loadVaccineData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final data = prefs.getString(_prefsKey);
+    if (data != null) {
+      final Map<String, dynamic> decodedData = json.decode(data);
+      final Map<String, List<String>> typedData = decodedData.map((key, value) {
+        return MapEntry(key, List<String>.from(value));
+      });
+      setState(() {
+        _events = typedData;
+      });
     }
+  }
+
+  Future<void> _saveVaccineData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final Map<String, dynamic> encodedData = _events.map((key, value) {
+      return MapEntry(key, value.toList());
+    });
+    await prefs.setString(_prefsKey, json.encode(encodedData));
   }
 
   @override
@@ -66,11 +63,13 @@ class _page8State extends State<page8> {
                 setState(() {
                   _selectedDay = selectedDay;
                 });
-                _fetchVaccineData();
               },
               eventLoader: (day) {
-                return _events[day] ?? [];
+                return _events[day.toIso8601String()] ?? [];
               },
+              calendarStyle: CalendarStyle(
+                markersMaxCount: 1,
+              ),
             ),
             Column(
               children: [
@@ -82,7 +81,7 @@ class _page8State extends State<page8> {
                   onPressed: () {
                     _showVaccineInputDialog(context);
                   },
-                  child: Text('Add Vaccine Date'),
+                  child: Text('Add Vaccine Name'),
                 ),
               ],
             ),
@@ -93,10 +92,11 @@ class _page8State extends State<page8> {
   }
 
   String buildVaccineNameText() {
-    if (_events[_selectedDay] == null) {
-      return '';
+    if (_events[_selectedDay.toIso8601String()] == null ||
+        _events[_selectedDay.toIso8601String()]!.isEmpty) {
+      return 'No vaccine data for ${_selectedDay.toIso8601String().substring(0, 10)}';
     } else {
-      return _events[_selectedDay]!.join(', ');
+      return _events[_selectedDay.toIso8601String()]!.join(', ');
     }
   }
 
@@ -127,6 +127,7 @@ class _page8State extends State<page8> {
               onPressed: () {
                 if (vaccineName.isNotEmpty) {
                   _addVaccineDate(vaccineName);
+                  _saveVaccineData();
                   Navigator.of(context).pop();
                 }
               },
@@ -138,31 +139,17 @@ class _page8State extends State<page8> {
     );
   }
 
-  void _addVaccineDate(String vaccineName) async {
-    final formattedDate = _selectedDay.toIso8601String().substring(0, 10);
-    final sanitizedVaccineName = vaccineName.replaceAll(RegExp(r'[^\w]'), '');
+  void _addVaccineDate(String vaccineName) {
+    final sanitizedVaccineName = vaccineName;
 
-    final jsonData = {
-      'vaccineName': sanitizedVaccineName,
-    };
-
-    final response = await http.post(
-      Uri.parse('$firebaseDatabaseURL/vaccine/$formattedDate.json'),
-      body: json.encode(jsonData),
-    );
-
-    if (response.statusCode == 200) {
-      setState(() {
-        if (_events[_selectedDay] == null) {
-          _events[_selectedDay] = [sanitizedVaccineName];
-        } else {
-          _events[_selectedDay]!.add(sanitizedVaccineName);
-        }
-      });
+    if (_events[_selectedDay.toIso8601String()] == null) {
+      _events[_selectedDay.toIso8601String()] = [sanitizedVaccineName];
     } else {
-      print('Failed to add vaccine date to Firebase');
-      print('Response Status Code: ${response.statusCode}');
-      print('Response Body: ${response.body}');
+      _events[_selectedDay.toIso8601String()]!.add(sanitizedVaccineName);
     }
+
+    setState(() {
+      _events = Map.from(_events);
+    });
   }
 }
