@@ -100,7 +100,7 @@ class _page8State extends State<page8> {
   String buildVaccineNameText() {
     if (_events[_selectedDay.toIso8601String()] == null ||
         _events[_selectedDay.toIso8601String()]!.isEmpty) {
-      return 'No vaccine data for ${_selectedDay.toIso8601String().substring(0, 10)}';
+      return 'No vaccine for ${_selectedDay.toIso8601String().substring(0, 10)}';
     } else {
       return _events[_selectedDay.toIso8601String()]!.join(', ');
     }
