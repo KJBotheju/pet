@@ -83,6 +83,12 @@ class _page8State extends State<page8> {
                   },
                   child: Text('Add Vaccine Name'),
                 ),
+                ElevatedButton(
+                  onPressed: () {
+                    _showDeleteVaccineNameDialog(context);
+                  },
+                  child: Text('Delete Vaccine Name'),
+                ),
               ],
             ),
           ],
@@ -151,5 +157,47 @@ class _page8State extends State<page8> {
     setState(() {
       _events = Map.from(_events);
     });
+  }
+
+  void _showDeleteVaccineNameDialog(BuildContext context) {
+    if (_events[_selectedDay.toIso8601String()] == null ||
+        _events[_selectedDay.toIso8601String()]!.isEmpty) {
+      // No vaccine names to delete for this date
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        List<String> vaccineNames = _events[_selectedDay.toIso8601String()]!;
+        return AlertDialog(
+          title: Text('Select Vaccine Name to Delete'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: vaccineNames
+                .map(
+                  (vaccineName) => ListTile(
+                    title: Text(vaccineName),
+                    onTap: () {
+                      _deleteVaccineName(vaccineName);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                )
+                .toList(),
+          ),
+        );
+      },
+    );
+  }
+
+  void _deleteVaccineName(String vaccineName) {
+    if (_events[_selectedDay.toIso8601String()] != null) {
+      _events[_selectedDay.toIso8601String()]!.remove(vaccineName);
+      _saveVaccineData();
+      setState(() {
+        _events = Map.from(_events);
+      });
+    }
   }
 }
