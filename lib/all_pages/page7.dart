@@ -33,24 +33,38 @@ class _page7State extends State<page7> {
     );
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> data = json.decode(response.body);
-      final List<Transaction> fetchedTransactions = [];
+      try {
+        final Map<String, dynamic>? data = json.decode(response.body);
+        if (data != null) {
+          final List<Transaction> fetchedTransactions = [];
 
-      data.forEach((key, value) {
-        final Transaction transaction = Transaction(
-          id: key,
-          title: value['title'],
-          amount: value['amount'],
-          date: DateTime.parse(value['date']),
-        );
-        fetchedTransactions.add(transaction);
-      });
+          data.forEach((key, value) {
+            final Transaction transaction = Transaction(
+              id: key,
+              title: value['title'] ??
+                  '', // Provide a default value if title is null
+              amount: value['amount'] ??
+                  0.0, // Provide a default value if amount is null
+              date: DateTime.tryParse(value['date'] ?? '') ??
+                  DateTime.now(), // Provide a default date or handle null
+            );
+            fetchedTransactions.add(transaction);
+          });
 
-      setState(() {
-        _dataLoaded = true;
-        _userTransaction.clear();
-        _userTransaction.addAll(fetchedTransactions);
-      });
+          setState(() {
+            _dataLoaded = true;
+            _userTransaction.clear();
+            _userTransaction.addAll(fetchedTransactions);
+          });
+        } else {
+          setState(() {
+            _dataLoaded = true;
+          });
+          print('Fetched data from Firebase is null.');
+        }
+      } catch (error) {
+        print('Error decoding data: $error');
+      }
     } else {
       print('Failed to fetch data from Firebase');
       print('Response Status Code: ${response.statusCode}');
