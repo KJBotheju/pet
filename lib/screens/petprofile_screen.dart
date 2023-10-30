@@ -82,6 +82,9 @@ class _PetProfilePageState extends State<PetProfilePage> {
         print('Response Body: ${response.body}');
       }
     } catch (error) {
+      setState(() {
+        _dataLoaded = true;
+      });
       print('Error fetching pet details from Firebase: $error');
     }
   }
