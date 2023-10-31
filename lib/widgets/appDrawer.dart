@@ -25,13 +25,13 @@ class AppDrawer extends StatelessWidget {
               color: kPrimaryColor,
             ),
             accountName: Text(
-              'Kavinda',
+              '',
               style: TextStyle(
                 color: Colors.black,
               ),
             ),
             accountEmail: Text(
-              'kavinda@gmail.com',
+              '',
               style: TextStyle(
                 color: Colors.black,
               ),
