@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             // Define the app's theme, including colors and fonts
             primarySwatch: Colors.purple, // Primary color
-            accentColor: Colors.deepOrange, // Accent color
+            //accentColor: Colors.deepOrange, // Accent color
             fontFamily: 'Lato', // Font family
           ),
           home: auth.isAuth

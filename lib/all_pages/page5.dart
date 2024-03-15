@@ -109,8 +109,8 @@ class PhotographerCard extends StatelessWidget {
                   launch(photographer.profileLink);
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
-                ),
+                    //primary: Colors.blue,
+                    ),
                 icon: Icon(Icons.facebook),
                 label: Text('View Profile'),
               ),
@@ -120,8 +120,8 @@ class PhotographerCard extends StatelessWidget {
                       photographer.messengerLink); // Open Messenger link
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 2, 86, 154),
-                ),
+                    //primary: Color.fromARGB(255, 2, 86, 154),
+                    ),
                 icon: Icon(Icons.messenger),
                 label: Text('Connect with Me'),
               ),

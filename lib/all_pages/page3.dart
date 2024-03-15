@@ -40,7 +40,7 @@ class _Page3State extends State<Page3> {
                   style: TextStyle(fontSize: 20),
                 ),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
+                  //primary: Colors.blue,
                   padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -66,7 +66,7 @@ class _Page3State extends State<Page3> {
                   style: TextStyle(fontSize: 20),
                 ),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
+                  //primary: Colors.blue,
                   padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -100,7 +100,7 @@ class _Page3State extends State<Page3> {
                   style: TextStyle(fontSize: 20),
                 ),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
+                  //primary: Colors.blue,
                   padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
